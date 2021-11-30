@@ -1,9 +1,8 @@
 /**
  * @packageDocumentation
- * @module api.functional
+ * @module api.functional.subscribe
  */
 //================================================================
+export * as consumers from "./consumers";
 export * as payments from "./payments";
-export * as users from "./users";
-export * as subscribe from "./subscribe";
 

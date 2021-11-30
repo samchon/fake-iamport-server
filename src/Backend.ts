@@ -4,14 +4,21 @@ import * as nest from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 
 import { Configuration } from "./Configuration";
-import { SGlobal } from "./SGlobal";
 
+/**
+ * Fake 아임포트 서버의 백엔드 프로그램.
+ * 
+ * @author Samchon
+ */
 export class Backend
 {
     private application_?: nest.INestApplication;
     private is_closing_: boolean = false;
 
-    public async open(port: number = Configuration.API_PORT): Promise<void>
+    /**
+     * 서버 개설.
+     */
+    public async open(): Promise<void>
     {
         //----
         // OPEN THE BACKEND SERVER
@@ -33,7 +40,7 @@ export class Backend
         this.application_.use(this.middleware.bind(this));
 
         // DO OPEN
-        await this.application_.listen(port);
+        await this.application_.listen(Configuration.API_PORT);
 
         //----
         // POST-PROCESSES
@@ -51,6 +58,9 @@ export class Backend
         });
     }
 
+    /**
+     * 서버 폐쇄.
+     */
     public async close(): Promise<void>
     {
         if (this.application_ === undefined)
@@ -59,13 +69,6 @@ export class Backend
         // DO CLOSE
         await this.application_.close();
         delete this.application_;
-        
-        // EXIT FROM THE CRITICAL-SERVER
-        if (await SGlobal.critical.is_loaded() === true)
-        {
-            const critical = await SGlobal.critical.get();
-            await critical.close();
-        }
     }
 
     private middleware
