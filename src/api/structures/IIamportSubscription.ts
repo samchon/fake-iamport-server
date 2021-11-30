@@ -1,5 +1,8 @@
 import { IIamportPayment } from "./IIamportPayment";
 
+/**
+ * 간편 결제 카드 정보.
+ */
 export interface IIamportSubscription
     extends IIamportSubscription.IAccessor
 {
@@ -19,6 +22,9 @@ export interface IIamportSubscription
 }
 export namespace IIamportSubscription
 {
+    /**
+     * {@link IIamportSubscription} 의 접근자 정보.
+     */
     export interface IAccessor
     {
         /**
@@ -31,6 +37,9 @@ export namespace IIamportSubscription
         customer_uid: string;
     }
 
+    /**
+     * 간편 결제 카드 입력 정보.
+     */
     export interface IStore extends IAccessor
     {
         /**
@@ -71,6 +80,9 @@ export namespace IIamportSubscription
         customer_postcode?: string;
     }
 
+    /**
+     * 결제 신청 입력 정보.
+     */
     export interface IOnetime
         extends Omit<IStore, "customer_uid">, 
             Omit<IAgain, "customer_uid">
@@ -87,6 +99,9 @@ export namespace IIamportSubscription
         customer_uid?: string;
     }
 
+    /**
+     * 간편 결제 카드로 결제 신청 입력 정보.
+     */
     export interface IAgain
         extends IAccessor
     {

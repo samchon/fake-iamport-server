@@ -1,3 +1,6 @@
+/**
+ * 결제 취소 정보.
+ */
 export interface IIamportPaymentCancel
 {
     pg_id: string;
@@ -7,8 +10,11 @@ export interface IIamportPaymentCancel
     reason: string;
     receipt_url: string;
 }
-export namespace IIampoyrtPaymentCancel
+export namespace IIamportPaymentCancel
 {
+    /**
+     * 결제 취소 입력 정보.
+     */
     export interface IStore
     {
         imp_uid: string;

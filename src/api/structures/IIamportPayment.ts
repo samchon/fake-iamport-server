@@ -3,6 +3,9 @@ import { IIamportPaymentCancel } from "./IIamportPaymentCancel";
 import { IIamportTransferPayment } from "./IIamportTransferPayment";
 import { IIamportVirtualBankPayment } from "./IIamportVirtualBankPayment";
 
+/**
+ * 결제 정보.
+ */
 export type IIamportPayment 
     = IIamportCardPayment
     | IIamportTransferPayment
@@ -32,7 +35,7 @@ export namespace IIamportPayment
 
         // ORDER INFO
         imp_uid: string;
-        name: string;
+        name?: string;
         amount: number;
         cancel_amount: number;
         currency: IIamportPayment.Currency;
@@ -61,7 +64,7 @@ export namespace IIamportPayment
         // TIMESTAMPS
         status: IIamportPayment.Status;
         started_at: number;
-        paid_at: number;
+        paid_at?: number;
         failed_at?: number;
         cancelled_at?: number;
 
@@ -69,6 +72,11 @@ export namespace IIamportPayment
         fail_reason?: SVGStringList;
         cancel_reason?: string;
         cancel_history: IIamportPaymentCancel[];
+
+        /**
+         * @internal
+         */
+        notice_url?: string;
     }
 
     export type PayMethod 

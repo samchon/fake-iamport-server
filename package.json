@@ -46,8 +46,6 @@
     "typescript-is": "^0.18.2"
   },
   "dependencies": {
-    "atob": "^2.1.2",
-    "btoa": "^1.2.1",
     "encrypted-nestjs": "^0.1.7",
     "node-fetch": "^2.6.1",
     "source-map-support": "^0.5.19",

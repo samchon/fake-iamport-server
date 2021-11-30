@@ -13,10 +13,16 @@ import { FakeIamportStorage } from "../../providers/FakeIamportStorage";
 import { FakeIamportSubscriptionProvider } from "../../providers/FakeIamportSubscriptionProvider";
 import { FakeIamportUserAuth } from "../../providers/FakeIamportUserAuth";
 import { RandomGenerator } from "../../utils/RandomGenerator";
+import { FakeIamportPaymentProvider } from "../../providers/FakeIamportPaymentProvider";
 
 @nest.Controller("subscribe/payments")
 export class FakeIampotSubscribePaymentsController
 {
+    /**
+     * 
+     * @param input 카드 결제 신청 정보
+     * @returns 카드 결제 정보
+     */
     @helper.TypedRoute.Post("onetime")
     public onetime
         (
@@ -74,13 +80,21 @@ export class FakeIampotSubscribePaymentsController
             status: "paid",
             started_at: Date.now() / 1000,
             paid_at: Date.now() / 1000,
-            cancel_history: []
+            cancel_history: [],
+
+            // HIDDEN
+            notice_url: input.notice_url
         };
-        FakeIamportStorage.payments.set(payment.imp_uid, payment);
+        FakeIamportPaymentProvider.store(payment);
 
         return FakeIamportResponseProvider.returns(payment);
     }
 
+    /**
+     * 
+     * @param input 미리 등록한 카드를 이용한 결제 신청 정보
+     * @returns 카드 결제 정보
+     */
     @helper.TypedRoute.Post("again")
     public again
         (
@@ -133,9 +147,12 @@ export class FakeIampotSubscribePaymentsController
             status: "paid",
             started_at: Date.now() / 1000,
             paid_at: Date.now() / 1000,
-            cancel_history: []
+            cancel_history: [],
+
+            // HIDDEN
+            notice_url: input.notice_url,
         };
-        FakeIamportStorage.payments.set(payment.imp_uid, payment);
+        FakeIamportPaymentProvider.store(payment);
 
         return FakeIamportResponseProvider.returns(payment);
     }

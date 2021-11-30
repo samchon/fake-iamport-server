@@ -15,6 +15,13 @@ import { RandomGenerator } from "../../utils/RandomGenerator";
 @nest.Controller("subscribe/consumers")
 export class FakeIamportSubscribeConsumersController 
 {
+    /**
+     * 
+     * @param request 
+     * @param customer_uid 
+     * @param input 
+     * @returns 
+     */
     @helper.TypedRoute.Post(":customer_uid")
     public store
         (
@@ -50,6 +57,12 @@ export class FakeIamportSubscribeConsumersController
         return FakeIamportResponseProvider.returns(subscription);
     }
 
+    /**
+     * 
+     * @param request 
+     * @param customer_uid 
+     * @returns 
+     */
     @helper.TypedRoute.Delete(":customer_uid")
     public erase
         (
