@@ -48,7 +48,7 @@ export async function test_fake_card_payment(): Promise<IIamportCardPayment>
                 expiry: "2028-12",
                 birth: "880311",
 
-                merchant_uid: v4()
+                merchant_uid: v4(),
                 amount: 25_000,
                 name: "Fake 주문"
             }
@@ -59,11 +59,11 @@ export async function test_fake_card_payment(): Promise<IIamportCardPayment>
         await imp.functional.payments.at
         (
             await connector.get(),
-            webhook.imp_uid
+            output.response.imp_uid
         );
 
     // 결제 방식 및 완료 여부 확인
-    const payment: IIamportPayment = reloaed.response;
+    const payment: IIamportPayment = reloaded.response;
     if (payment.pay_method !== "card")
         throw new Error("Bug on payments.at(): its pay_method must be card.");
     else if (!payment.paid_at || payment.status !== "paid")
@@ -168,6 +168,16 @@ export async function test_fake_subscription_payment_again(): Promise<IIamportCa
     // 고객 (간편 결제로 등록할 카드) 의 식별자 키
     const customer_uid: string = v4();
 
+    // 커넥터 정보 구성, 토큰 만료시 자동으로 갱신해 줌
+    const connector: imp.IamportConnector = new imp.IamportConnector
+    (
+        "http://127.0.0.1:10851",
+        {
+            imp_key: "test_imp_key",
+            imp_secret: "test_imp_secret"
+        }
+    );
+
     // 간편 결제 카드 등록하기
     await imp.functional.subscribe.consumers.store
     (
@@ -175,7 +185,7 @@ export async function test_fake_subscription_payment_again(): Promise<IIamportCa
         customer_uid,
         {
             customer_uid,
-            card_number: RandomGenerator.cardNumber(),
+            card_number: "1111-2222-3333-4444",
             expiry: "2028-12",
             birth: "880311",
         }
@@ -199,7 +209,7 @@ export async function test_fake_subscription_payment_again(): Promise<IIamportCa
         await imp.functional.payments.at
         (
             await connector.get(),
-            webhook.imp_uid
+            output.response.imp_uid
         );
 
     // 결제 방식 및 완료 여부 확인
