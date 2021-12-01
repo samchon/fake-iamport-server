@@ -1,4 +1,4 @@
 export * from "./module";
 
-import * as sdk from "./module";
-export default sdk;
+import * as imp from "./module";
+export default imp;

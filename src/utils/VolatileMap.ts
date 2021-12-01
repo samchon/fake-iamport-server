@@ -1,4 +1,5 @@
 import { HashMap } from "tstl/container/HashMap";
+import { OutOfRange } from "tstl/exception/OutOfRange";
 import { TreeMap } from "tstl/container/TreeMap";
 import { equal_to } from "tstl/functional/comparators";
 import { hash } from "tstl/functional/hash";
@@ -8,6 +9,9 @@ export class VolatileMap<Key, T>
     private readonly dict_: HashMap<Key, T>;
     private readonly timepoints_: TreeMap<number, Key>;
 
+    /* -----------------------------------------------------------
+        CONSTRUCTORS
+    ----------------------------------------------------------- */
     public constructor
         (
             public readonly expiration: VolatileMap.IExpiration,
@@ -19,6 +23,15 @@ export class VolatileMap<Key, T>
         this.timepoints_ = new TreeMap();
     }
 
+    public clear(): void
+    {
+        this.dict_.clear();
+        this.timepoints_.clear();
+    }
+
+    /* -----------------------------------------------------------
+        ACCESSORS
+    ----------------------------------------------------------- */
     public size(): number
     {
         return this.dict_.size();
@@ -29,17 +42,16 @@ export class VolatileMap<Key, T>
         return this.dict_.get(key);
     }
 
-    public erase(key: Key): number
+    public back(): T
     {
-        return this.dict_.erase(key);
+        if (this.size() === 0)
+            throw new OutOfRange("No element exists.");
+        return this.dict_.rbegin().second;
     }
 
-    public clear(): void
-    {
-        this.dict_.clear();
-        this.timepoints_.clear();
-    }
-
+    /* -----------------------------------------------------------
+        ELEMENTS I/O
+    ----------------------------------------------------------- */
     public set(key: Key, value: T): void
     {
         this._Clean_up();
@@ -68,6 +80,11 @@ export class VolatileMap<Key, T>
             this.dict_.erase(it.second);
             this.timepoints_.erase(it);
         }
+    }
+
+    public erase(key: Key): number
+    {
+        return this.dict_.erase(key);
     }
 }
 export namespace VolatileMap

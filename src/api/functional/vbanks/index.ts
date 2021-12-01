@@ -8,7 +8,7 @@ import { Fetcher } from "./../../__internal/Fetcher";
 import { Primitive } from "./../../Primitive";
 import type { IConnection } from "./../../IConnection";
 
-import type { IIamportVirtualBankPayment } from "./../../structures/IIamportVirtualBankPayment";
+import type { IIamportVBankPayment } from "./../../structures/IIamportVBankPayment";
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
 
 
@@ -40,8 +40,8 @@ export function store
 }
 export namespace store
 {
-    export type Input = Primitive<IIamportVirtualBankPayment.IStore>;
-    export type Output = Primitive<IIamportResponse<IIamportVirtualBankPayment>>;
+    export type Input = Primitive<IIamportVBankPayment.IStore>;
+    export type Output = Primitive<IIamportResponse<IIamportVBankPayment>>;
 
 
     export const METHOD = "POST";
@@ -85,8 +85,8 @@ export function update
 }
 export namespace update
 {
-    export type Input = Primitive<IIamportVirtualBankPayment.IUpdate>;
-    export type Output = Primitive<IIamportResponse<IIamportVirtualBankPayment>>;
+    export type Input = Primitive<IIamportVBankPayment.IUpdate>;
+    export type Output = Primitive<IIamportResponse<IIamportVBankPayment>>;
 
 
     export const METHOD = "PUT";

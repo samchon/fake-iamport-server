@@ -12,19 +12,66 @@
   - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
   - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
   - 예제 코드
-    - 간편 결제: [src/test/features/examples/test_fake_subscription_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment.ts)
-    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
     - 가상 계좌 결제: [src/test/features/examples/test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
+    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+    - 간편 결제
+      - [src/test/features/examples/test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - [src/test/features/examples/test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
 
 ```typescript
-import btoa from "btoa";
+import { v4 } from "uuid";
+
 import imp from "iamport-server-api";
-import { IIamportPayment } from "iamport-server-api/lib/structures/ITossPayment";
-import { assertType } from "typescript-is";
+import { IIamportCardPayment } from "iamport-server-api/lib/structures/IIamportCardPayment";
+import { IIamportPayment } from "iamport-server-api/lib/structures/IIamportPayment";
+import { IIamportResponse } from "iamport-server-api/lib/structures/IIamportResponse";
 
-export async function test_fake_card_payment_approval(): Promise<void>
+export async function test_fake_card_payment(): Promise<IIamportCardPayment>
 {
+    // 커넥터 정보 구성, 토큰 만료시 자동으로 갱신해 줌
+    const connector: imp.IamportConnector = new imp.IamportConnector
+    (
+        "http://127.0.0.1:10851",
+        {
+            imp_key: "test_imp_key",
+            imp_secret: "test_imp_secret"
+        }
+    );
 
+    // 카드로 결제하기
+    const output: IIamportResponse<IIamportCardPayment> = 
+        await imp.functional.subscribe.payments.onetime
+        (
+            await connector.get(),
+            {
+                card_number: "1111-2222-3333-4444",
+                expiry: "2028-12",
+                birth: "880311",
+
+                merchant_uid: v4()
+                amount: 25_000,
+                name: "Fake 주문"
+            }
+        );
+
+    // 결제 내역 조회하기
+    const reloaded: IIamportResponse<IIamportPayment> = 
+        await imp.functional.payments.at
+        (
+            await connector.get(),
+            webhook.imp_uid
+        );
+
+    // 결제 방식 및 완료 여부 확인
+    const payment: IIamportPayment = reloaed.response;
+    if (payment.pay_method !== "card")
+        throw new Error("Bug on payments.at(): its pay_method must be card.");
+    else if (!payment.paid_at || payment.status !== "paid")
+        throw new Error("Bug on payments.at(): its status must be paid.");
+
+    // 첫 번째 if condition 에 의해 자동 다운 캐스팅 된 상태
+    payment.card_number;
+    return payment;
 }
 ```
 
@@ -67,23 +114,24 @@ npm run stop
 
 더하여 `fake-iamport-server` 는 npm 모듈로 설치하여 구동할 수도 있다.
 
-귀하의 백엔드 서버 테스트 자동화 프로그램이, `fake-iamport-server` 의 설정과 개설 및 폐쇄를 모두 통제하고자 할 때는, github 저장소를 clone 하는 것보다, 이처럼 npm 모듈을 설치하여 import 하는 것이 훨씬 더 알맞다.
+귀하의 백엔드 서버 테스트 자동화 프로그램이 `fake-iamport-server` 의 설정과 개설 및 폐쇄를 모두 통제하고자 할 때는, github 저장소를 clone 하는 것보다, 이처럼 npm 모듈을 설치하여 import 하는 것이 훨씬 더 알맞다.
 
 따라서 귀하의 백엔드 서버가 TypeScript 내지 JavaScript 를 사용한다면, github 저장소를 clone 하여 `fake-iamport-server` 를 별도 구동하기보다, 귀하의 백엔드 서버에서 `fake-iamport-server` 의 개설과 폐쇄를 직접 통제하기를 권장한다.
 
 ```typescript
 // npm install --save-dev fake-iamport-server
-import FakeToss from "fake-iamport-server";
+import FakeIamport from "fake-iamport-server";
 
 async function main(): Promise<void>
 {
-    FakeToss.Configuration.WEBHOOK_URL = "your-backend-webhook-api-url";
-    FakeToss.Configuration.authorize = token => 
+    FakeIamport.Configuration.WEBHOOK_URL = "your-backend-webhook-api-url";
+    FakeIamport.Configuration.authorize = accessor => 
     {
-        return token === "test_ak_ZORzdMaqN3wQd5k6ygr5AkYXQGwy";
+        return accessor.imp_key === "test_imp_key" 
+            && accessor.imp_secret === "test_imp_secret";
     };
 
-    const fake: FakeToss.Backend = new FakeToss.Backend();
+    const fake: FakeIamport.Backend = new FakeIamport.Backend();
     await fake.open();
     await fake.close();
 }
@@ -93,9 +141,9 @@ async function main(): Promise<void>
 [![npm version](https://badge.fury.io/js/iamport-server-api.svg)](https://www.npmjs.com/package/iamport-server-api)
 [![Downloads](https://img.shields.io/npm/dm/iamport-server-api.svg)](https://www.npmjs.com/package/iamport-server-api)
 
-본 백엔드 프로젝트 `fake-iamport-server` 는 비록 토스 페이먼츠의 API 를 흉내내어 만든 가짜이지만, 이것을 통하여 만들어지는 SDK (Software Development Kit) 만큼은 진짜이다. 이 SDK 를 이용하면, `fake-iamport-server` 뿐 아니라 진짜 아임포트 서버와도 원활히 연동할 수 있기 때문이다.
+본 백엔드 프로젝트 `fake-iamport-server` 는 비록 아임포트의 API 를 흉내내어 만든 가짜이지만, 이것을 통하여 만들어지는 SDK (Software Development Kit) 만큼은 진짜이다. 이 SDK 를 이용하면, `fake-iamport-server` 뿐 아니라 진짜 아임포트 서버와도 원활히 연동할 수 있기 때문이다.
 
-고로 토스 페이먼츠와 연동하는 TypeScript 기반 백엔드 서버를 개발함에 있어, 가짜 아임포트 서버 `fake-iamport-server` 는 직접 이용치 않더라도, 실제 아임포트 서버와의 연동을 위하여, SDK 라이브러리만큼은 반드시 설치하기를 권장하는 바이다.
+고로 아임포트와 연동하는 TypeScript 기반 백엔드 서버를 개발함에 있어, 가짜 아임포트 서버 `fake-iamport-server` 는 직접 이용치 않더라도, 실제 아임포트 서버와의 연동을 위하여, SDK 라이브러리만큼은 반드시 설치하기를 권장하는 바이다.
 
 ```bash
 npm install --save fake-iamport-server-api
@@ -105,58 +153,65 @@ npm install --save fake-iamport-server-api
 
 마지막으로 실 서버를 배포하며, 연동 대상 서버를 가짜에서 진짜로 교체해주면 된다.
 
-  - 자료 구조 매뉴얼: [src/api/structures/ITossBilling.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/ITossBilling.ts)
+  - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
   - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
   - 예제 코드
-    - 간편 결제: [src/test/features/examples/test_fake_billing_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_billing_payment.ts)
-    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
     - 가상 계좌 결제: [src/test/features/examples/test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
+    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+    - 간편 결제
+      - [src/test/features/examples/test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - [src/test/features/examples/test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
 
 ```typescript
-import btoa from "btoa";
-import toss from "iamport-server-api";
-import { ITossBilling } from "iamport-server-api/lib/structures/ITossBilling";
-import { ITossPayment } from "iamport-server-api/lib/structures/ITossPayment";
-import { assertType } from "typescript-is";
-
-export async function test_fake_payment_billing_payment(): Promise<void>
+export async function test_fake_subscription_payment_again(): Promise<IIamportCardPayment>
 {
-    const connection: toss.IConnection = {
-        host: "http://127.0.0.1:30771", // FAKE-SERVER
-        // host: "https://api.tosspayments.com/v1", // REAL-SERVER
-        headers: {
-            Authorization: `Basic ${btoa("test_ak_ZORzdMaqN3wQd5k6ygr5AkYXQGwy")}`
-        }
-    };
+    // 고객 (간편 결제로 등록할 카드) 의 식별자 키
+    const customer_uid: string = v4();
 
-    const billing: ITossBilling = await toss.functional.billing.authorizations.card.store
+    // 간편 결제 카드 등록하기
+    await imp.functional.subscribe.consumers.store
     (
-        connection,
+        await connector.get(),
+        customer_uid,
         {
-            customerKey: "some-consumer-key",
-            cardNumber: "1111222233334444",
-            cardExpirationYear: "28",
-            cardExpirationMonth: "03",
-            cardPassword: "99",
-            customerBirthday: "880311",
-            consumerName: "남정호"
+            customer_uid,
+            card_number: RandomGenerator.cardNumber(),
+            expiry: "2028-12",
+            birth: "880311",
         }
     );
-    assertType<ITossBilling>(billing);
 
-    const payment: ITossPayment = await toss.functional.billling.pay
-    (
-        connection,
-        billing.billingKey,
-        {
-            method: "billing",
-            billingKey: billing.billingKey,
-            customerKey: "some-consumer-key",
-            orderId: "some-order-id",
-            amount: 10_000
-        });
-    );
-    assertType<ITossPayment>(payment);
+    // 간편 결제 카드로 결제하기
+    const output: IIamportResponse<IIamportCardPayment> = 
+        await imp.functional.subscribe.payments.again
+        (
+            await connector.get(),
+            {
+                customer_uid,
+                merchant_uid: v4(),
+                amount: 10_000,
+                name: "Fake 주문",
+            }
+        );
+
+    // 결제 내역 조회하기
+    const reloaded: IIamportResponse<IIamportPayment> = 
+        await imp.functional.payments.at
+        (
+            await connector.get(),
+            webhook.imp_uid
+        );
+
+    // 결제 방식 및 완료 여부 확인
+    const payment: IIamportPayment = reloaded.response;
+    if (payment.pay_method !== "card")
+        throw new Error("Bug on payments.at(): its pay_method must be card.");
+    else if (!payment.paid_at || payment.status !== "paid")
+        throw new Error("Bug on payments.at(): its status must be paid.");
+
+    // 첫 번째 if condition 에 의해 자동 다운 캐스팅 된 상태
+    payment.card_number;
+    return payment;
 }
 ```
 
@@ -208,19 +263,19 @@ Automatic SDK generator for the NestJS.
 
   - https://github.com/samchon/nestia
 
-Nesita 는 NestJS 로 만든 백엔드 서버 프로그램을 컴파일러 수준에서 분석, 클라이언트가 사용할 수 있는 SDK 라이브러리를 만들어주는 프로그램이다. `virtual-toss-payments-server` 가 토스 페이먼츠의 API 를 흉내내어 만든 가짜 서버인데, 뜬금 클라이언트가 진짜 토스 페이먼츠와의 연동에 사용할 수 있는 SDK 라이브러리가 함께 제공되는 이유도 바로 이 덕분이다.
+Nesita 는 NestJS 로 만든 백엔드 서버 프로그램을 컴파일러 수준에서 분석, 클라이언트가 사용할 수 있는 SDK 라이브러리를 만들어주는 프로그램이다. `fake-iamport-server` 가 아임포트의 API 를 흉내내어 만든 가짜 서버인데, 뜬금 클라이언트가 진짜 아임포트와의 연동에 사용할 수 있는 SDK 라이브러리가 함께 제공되는 이유도 바로 이 덕분이다.
 
-때문에 만일 귀하가 토스 페이먼츠와 연동하는 백엔드 서버를 개발 중이라면, `virtual-toss-payments-server` 뿐 아니라 [Nestia](https://github.com/samchon/nestia) 도 함께 사용해보는 것이 어떠한가? 귀하의 백엔드 서버 또한 `virtual-toss-payments-server` 처럼 클라이언트 개발자가 사용할 수 있는 SDK 라이브러리를 자동으로 빌드하여 배포할 수 있으니, 백엔드 개발자는 API 문서를 따로 만들고 클라이언트 개발자는 중복 DTO 타입과 API 연동 함수를 개발하는 등의 번거로운 일을 일절 하지 않아도 된다.
+때문에 만일 귀하가 아임포트와 연동하는 백엔드 서버를 개발 중이라면, `fake-iamport-server` 뿐 아니라 [Nestia](https://github.com/samchon/nestia) 도 함께 사용해보는 것이 어떠한가? 귀하의 백엔드 서버 또한 `fake-iamport-server` 처럼 클라이언트 개발자가 사용할 수 있는 SDK 라이브러리를 자동으로 빌드하여 배포할 수 있으니, 백엔드 개발자는 API 문서를 따로 만들고 클라이언트 개발자는 중복 DTO 타입과 API 연동 함수를 개발하는 등의 번거로운 일을 일절 하지 않아도 된다.
 
 ### 4.2. Expiration
 `fake-iamport-server` 는 결제 데이터를 메모리에 임시 기록한다.
 
 왜냐하면 `fake-iamport-server` 는 아임포트 서버의 API 를 흉내내어 만든 가짜 서버로써, 개발 단계에서 쓰이는 임시 시스템에 불과하기 때문이다. 따라서 `fake-iamport-server` 에 생성된 결제 내지 카드 정보들은 모두 테스트 용도로 생성된 임시 레코드가 불과하기에, 구태여 이를 DB 나 로컬 디스크에 저장하여 영구 보존할 이유가 없다.
 
-이에 `fake-iamport-server` 는 결제 데이터를 메모리에 임시로 기록하며, 한 편으로 그 수량 및 보존 기한에 한도를 두어, 쉬이 메모리 부족 현상이 일어나지 않도록 하고 있다. 이러한 임시 데이터 만료 정보는 [src/Configuration.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/Configuration.ts) 파일의 `EXPIRATION` 변수에 정의되어있으며, 결제 및 간편 카드 결제 등록 데이터는 모두 [src/providers/FakeTossStorage.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/providers/FakeTossStorage.ts) 에서 관리된다.
+이에 `fake-iamport-server` 는 결제 데이터를 메모리에 임시로 기록하며, 한 편으로 그 수량 및 보존 기한에 한도를 두어, 쉬이 메모리 부족 현상이 일어나지 않도록 하고 있다. 이러한 임시 데이터 만료 정보는 [src/Configuration.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/Configuration.ts) 파일의 `EXPIRATION` 변수에 정의되어있으며, 결제 및 간편 카드 결제 등록 데이터는 모두 [src/providers/FakeIamportStorage.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/providers/FakeIamportStorage.ts) 에서 관리된다.
 
   - 임시 데이터 만료 정보: [src/Configuration.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/Configuration.ts)
-  - 임시 데이터 저장소: [src/providers/FakeTossStorage.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/providers/FakeTossStorage.ts)
+  - 임시 데이터 저장소: [src/providers/FakeIamportStorage.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/providers/FakeIamportStorage.ts)
   - 임시 데이터 컨테이너: [src/utils/VolatileMap.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/utils/VolatileMap.ts)
 
 > 혹여 `fake-iamport-server` 를 사용하는 백엔드 시스템이 제법 크고 그 네트워크 환경 구성이 매우 복잡하여, `fake-iamport-server` 를 독립 서버로 배포하고, 가상의 결제 레코드 또한 DB 에 저장해야 하며, 무중단 배포 시스템 또한 필요하지 않을까?

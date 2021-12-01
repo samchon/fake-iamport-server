@@ -3,7 +3,7 @@ import { IIamportPayment } from "./IIamportPayment";
 /**
  * 가상 계좌 결제 정보.
  */
-export interface IIamportVirtualBankPayment
+export interface IIamportVBankPayment
     extends IIamportPayment.IBase<"vbank">
 {
     /**
@@ -36,7 +36,7 @@ export interface IIamportVirtualBankPayment
      */
     vbank_issued_at: number;
 }
-export namespace IIamportVirtualBankPayment
+export namespace IIamportVBankPayment
 {
     /**
      * 가상 계좌 결제 입력 정보.

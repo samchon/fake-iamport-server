@@ -14,7 +14,7 @@ import { VolatileMap } from "./utils/VolatileMap";
 import { IIamportUser } from "./api/structures/IIamportUser";
 
 /**
- * Fake 토스 페이먼츠 서버의 설정 정보.
+ * Fake 아임포트 서버의 설정 정보.
  * 
  * @author Samchon
  */
@@ -49,7 +49,7 @@ export namespace Configuration
     /**
      * 서버가 사용할 포트 번호.
      */
-    export let API_PORT: number = 30771;
+    export let API_PORT: number = 10851;
 
     /**
      * Webhook 이벤트를 수신할 URL 주소.

@@ -2,7 +2,7 @@ import { DomainError } from "tstl/exception/DomainError";
 
 import { IIamportPayment } from "../api/structures/IIamportPayment";
 import { IIamportPaymentCancel } from "../api/structures/IIamportPaymentCancel";
-import { IIamportVirtualBankPayment } from "../api/structures/IIamportVirtualBankPayment";
+import { IIamportVBankPayment } from "../api/structures/IIamportVBankPayment";
 
 import { Configuration } from "../Configuration";
 import { FakeIamportStorage } from "./FakeIamportStorage";
@@ -15,7 +15,7 @@ export namespace FakeIamportPaymentProvider
         webhook(payment).catch(() => {});
     }
 
-    export function deposit(payment: IIamportVirtualBankPayment): void
+    export function deposit(payment: IIamportVBankPayment): void
     {
         payment.status = "paid";
         payment.paid_at = Date.now() / 1000;
@@ -56,6 +56,7 @@ export namespace FakeIamportPaymentProvider
             merchant_uid: payment.merchant_uid,
             status: payment.status,
         };
+        FakeIamportStorage.webhooks.set(webhook.imp_uid, webhook);
 
         await fetch(payment.notice_url || Configuration.WEBHOOK_URL, {
             method: "POST",

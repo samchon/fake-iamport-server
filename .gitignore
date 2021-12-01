@@ -1,6 +1,6 @@
-bin/
 lib/
 node_modules/
+packages/api/README.md
 
 *.DS_Store
 package-lock.json

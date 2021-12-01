@@ -1,45 +1,99 @@
 import { IIamportCardPayment } from "./IIamportCardPayment";
 import { IIamportPaymentCancel } from "./IIamportPaymentCancel";
 import { IIamportTransferPayment } from "./IIamportTransferPayment";
-import { IIamportVirtualBankPayment } from "./IIamportVirtualBankPayment";
+import { IIamportVBankPayment } from "./IIamportVBankPayment";
 
 /**
  * 결제 정보.
+ * 
+ * `IIamportPayment` 는 아임포트의 결제 정보를 형상화한 자료구조이자 유니언 타입의 
+ * 인터페이스로써, if condition 을 통하여 method 값을 특정하면, 파생 타입이 자동으로
+ * 지정된다.
+ * 
+ * ```typescript
+ * if (payment.pay_method === "card")
+ *    payment.card_number; // payment be IIamportCardPayment
+ * ```
  */
 export type IIamportPayment 
     = IIamportCardPayment
     | IIamportTransferPayment
-    | IIamportVirtualBankPayment
+    | IIamportVBankPayment
     | IIamportPayment.IBase<Exclude<
         IIamportPayment.PayMethod, 
         "card"|"samsung"|"trans"|"vbank">>
 
 export namespace IIamportPayment
 {
-    export interface IAccessor
+    /**
+     * 
+     */
+    export interface IWebhook
     {
-        merchant_uid: string;
-    }
-
-    export interface IWebhook extends IAccessor
-    {
+        /**
+         * 결제 정보 {@link IIamportPayment} 의 식별자 키.
+         */
         imp_uid: string;
+
+        /**
+         * 주문 식별자 키.
+         * 
+         * 아임포트 서버가 아닌, 이를 사용하는 서비스가 자체적으로 발급하고 관리한다.
+         */
+        merchant_uid: string;
+
+        /**
+         * 현재 상태.
+         */
         status: Status;
     }
 
     export interface IBase<Method extends PayMethod>
-        extends IAccessor
     {
-        // TYPE INFO
+        // IDENTIFIER
         pay_method: Method;
 
-        // ORDER INFO
+        /**
+         * 결제 정보 {@link IIamportPayment} 의 식별자 키.
+         */
         imp_uid: string;
+
+        // ORDER INFO
+        /**
+         * 주문 식별자 키.
+         * 
+         * 아임포트 서버가 아닌, 이를 사용하는 서비스가 자체적으로 발급하고 관리한다.
+         */
+        merchant_uid: string;
+
+        /**
+         * 주문명, 누락 가능.
+         */
         name?: string;
+
+        /**
+         * 결제 총액.
+         */
         amount: number;
+
+        /**
+         * 결제 취소, 환불 총액.
+         */
         cancel_amount: number;
+
+        /**
+         * 통화 단위.
+         */
         currency: IIamportPayment.Currency;
+
+        /**
+         * 영수증 URL
+         */
         receipt_url: string;
+
+        /**
+         * 현금 영수증 발행 여부.
+         */
         cash_receipt_issue: boolean;
 
         // PAYMENT PRVIDER INFO
@@ -61,11 +115,30 @@ export namespace IIamportPayment
         custom_data?: string;
         user_agent?: string;
         
-        // TIMESTAMPS
+        // PROPERTIES
+        /**
+         * 결제의 현재 (진행) 상태.
+         */
         status: IIamportPayment.Status;
+
+        /**
+         * 결제 신청 일시.
+         */
         started_at: number;
+
+        /**
+         * 결제 (지불) 완료 일시.
+         */
         paid_at?: number;
+
+        /**
+         * 결제 실패 일시.
+         */
         failed_at?: number;
+
+        /**
+         * 결제 취소 일시.
+         */
         cancelled_at?: number;
 
         // CANCELLATIONS

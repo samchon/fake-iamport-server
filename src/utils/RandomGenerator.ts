@@ -53,6 +53,6 @@ export namespace RandomGenerator
 
     export function cardNumber(): string
     {
-        return ArrayUtil.repeat(4, () => digit(1, 4)).join("");
+        return ArrayUtil.repeat(4, () => digit(1, 4)).join("-");
     }
 }

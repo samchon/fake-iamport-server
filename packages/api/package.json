@@ -1,20 +1,26 @@
 {
-  "name": "@samchon/fake-iamport-server-api",
-  "version": "0.0.0",
-  "description": "API for fake-iamport-server",
+  "name": "iamport-server-api",
+  "version": "0.0.1",
+  "description": "API for iamport server",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/samchon/fake-iamport-server"
   },
-  "author": "${AUTHOR}",
+  "author": "Samchon",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samchon/fake-iamport-server/issues"
   },
   "homepage": "https://github.com/samchon/fake-iamport-server#readme",
   "dependencies": {
-    "node-fetch": "^2.6.1"
-  }
+    "node-fetch": "^2.6.1",
+    "tstl": "^2.5.0"
+  },
+  "keywords": [
+    "iamport",
+    "sdk",
+    "api"
+  ]
 }
