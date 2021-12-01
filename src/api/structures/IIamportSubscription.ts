@@ -2,6 +2,8 @@ import { IIamportPayment } from "./IIamportPayment";
 
 /**
  * 간편 결제 카드 정보.
+ * 
+ * @author Jeongho Nam - https://github.com/samchon
  */
 export interface IIamportSubscription
     extends IIamportSubscription.IAccessor

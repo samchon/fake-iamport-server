@@ -2,6 +2,8 @@ import { IIamportPayment } from "./IIamportPayment";
 
 /**
  * 가상 계좌 결제 정보.
+ * 
+ * @author Jeongho Nam - https://github.com/samchon
  */
 export interface IIamportVBankPayment
     extends IIamportPayment.IBase<"vbank">

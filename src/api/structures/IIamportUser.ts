@@ -12,7 +12,7 @@
  * 초과되지 않도록 관리하는 것은 매우 힘든 일이다. 이에 `iamport-server-api` 에서는 아임포트
  * 유저 인증 토큰이 만료될 때마다 자동 갱신해주는, {@link IamportConnector} 클래스를 제공한다.
  * 
- * @author Samchon
+ * @author Jeongho Nam - https://github.com/samchon
  */
 export interface IIamportUser
 {

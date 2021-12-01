@@ -14,6 +14,8 @@ import { IIamportVBankPayment } from "./IIamportVBankPayment";
  * if (payment.pay_method === "card")
  *    payment.card_number; // payment be IIamportCardPayment
  * ```
+ * 
+ * @author Jeongho Nam - https://github.com/samchon
  */
 export type IIamportPayment 
     = IIamportCardPayment
@@ -26,7 +28,7 @@ export type IIamportPayment
 export namespace IIamportPayment
 {
     /**
-     * 
+     * 웹훅 데이터.
      */
     export interface IWebhook
     {
@@ -48,6 +50,9 @@ export namespace IIamportPayment
         status: Status;
     }
 
+    /**
+     * 결제 기본 (공통) 정보.
+     */
     export interface IBase<Method extends PayMethod>
     {
         // IDENTIFIER

@@ -1,5 +1,7 @@
 /**
  * 아임포트 고유의 응답 데이터.
+ * 
+ * @author Jeongho Nam - https://github.com/samchon
  */
 export interface IIamportResponse<T extends object>
 {
