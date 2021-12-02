@@ -22,9 +22,9 @@ export namespace IIamportPaymentCancel
         imp_uid: string;
         merchant_uid: string;
         amount: number;
-        tax_free: number;
-        checksum: number;
+        checksum: number | null;
         reason: string;
+        tax_free?: number;
 
         refund_holder?: string;
         refund_bank?: string;
