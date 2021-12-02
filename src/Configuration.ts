@@ -10,9 +10,6 @@ import { DomainError } from "tstl/exception/DomainError";
 import { InvalidArgument } from "tstl/exception/InvalidArgument";
 import { OutOfRange } from "tstl/exception/OutOfRange";
 
-import { VolatileMap } from "./utils/VolatileMap";
-import { IIamportUser } from "./api/structures/IIamportUser";
-
 /**
  * Fake 아임포트 서버의 설정 정보.
  * 
@@ -41,7 +38,7 @@ export namespace Configuration
     /**
      * 임시 저장소의 레코드 만료 기한.
      */
-    export const STORAGE_EXPIRATION: VolatileMap.IExpiration = {
+    export const STORAGE_EXPIRATION: IExpiration = {
         time: 3 * 60 * 1000,
         capacity: 1000
     };
@@ -63,12 +60,44 @@ export namespace Configuration
      * 
      * @param accessor 인증 키 값
      */
-    export let authorize: (accessor: IIamportUser.IAccessor) => boolean 
+    export let authorize: (accessor: IAccessor) => boolean 
         = accessor =>
         {
             return accessor.imp_key === "test_imp_key" 
                 && accessor.imp_secret === "test_imp_secret";
         };
+
+    /**
+     * 아임포트에서 부여해 준 API 및 secret 키.
+     */
+    export interface IAccessor
+    {
+        /**
+         * API 키.
+         */
+        imp_key: string;
+
+        /**
+         * Secret 키.
+         */
+        imp_secret: string;
+    }
+
+    /**
+     * 임시 저장소의 레코드 만료 기한.
+     */
+    export interface IExpiration
+    {
+        /**
+         * 만료 시간.
+         */
+        time: number;
+
+        /**
+         * 최대 수용량.
+         */
+        capacity: number;
+    }
 }
 
 // CUSTOM EXCEPTIION CONVERSION
