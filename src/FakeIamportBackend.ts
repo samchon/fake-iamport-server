@@ -3,14 +3,14 @@ import * as helper from "encrypted-nestjs";
 import * as nest from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 
-import { Configuration } from "./Configuration";
+import { FakeIamportConfiguration } from "./FakeIamportConfiguration";
 
 /**
  * Fake 아임포트 서버의 백엔드 프로그램.
  * 
  * @author Samchon
  */
-export class Backend
+export class FakeIamportBackend
 {
     private application_?: nest.INestApplication;
     private is_closing_: boolean = false;
@@ -29,7 +29,7 @@ export class Backend
             await helper.EncryptedModule.dynamic
             (
                 __dirname + "/controllers", 
-                Configuration.ENCRYPTION_PASSWORD
+                FakeIamportConfiguration.ENCRYPTION_PASSWORD
             ),
             { logger: false }
         );
@@ -40,7 +40,7 @@ export class Backend
         this.application_.use(this.middleware.bind(this));
 
         // DO OPEN
-        await this.application_.listen(Configuration.API_PORT);
+        await this.application_.listen(FakeIamportConfiguration.API_PORT);
 
         //----
         // POST-PROCESSES

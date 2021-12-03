@@ -39,6 +39,8 @@ export class FakeIampotSubscribePaymentsController
      * 
      * @param input 카드 결제 신청 정보
      * @returns 카드 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post("onetime")
     public onetime
@@ -104,7 +106,7 @@ export class FakeIampotSubscribePaymentsController
         };
         FakeIamportPaymentProvider.store(payment);
 
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 
     /**
@@ -122,6 +124,8 @@ export class FakeIampotSubscribePaymentsController
      * 
      * @param input 미리 등록한 카드를 이용한 결제 신청 정보
      * @returns 카드 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post("again")
     public again
@@ -182,6 +186,6 @@ export class FakeIampotSubscribePaymentsController
         };
         FakeIamportPaymentProvider.store(payment);
 
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 }

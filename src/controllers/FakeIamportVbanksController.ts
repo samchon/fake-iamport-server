@@ -23,6 +23,8 @@ export class FakeIamportVbanksController
      * 
      * @param input 가상 계좌 입력 정보
      * @returns 가상 계좌 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post()
     public store
@@ -85,7 +87,7 @@ export class FakeIamportVbanksController
         FakeIamportPaymentProvider.store(payment);
 
         // RETURNS
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 
     /**
@@ -93,6 +95,8 @@ export class FakeIamportVbanksController
      * 
      * @param input 가상 계좌 편집 입력 정보
      * @returns 편집된 가상 계좌 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Put()
     public update
@@ -118,6 +122,6 @@ export class FakeIamportVbanksController
 
         // RETURNS WITH INFORM
         FakeIamportPaymentProvider.webhook(payment);
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 }

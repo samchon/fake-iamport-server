@@ -23,6 +23,8 @@ export class FakeIamportUsersController
      * 
      * @param input 아임포트의 API 및 secret 키 정보
      * @returns 유저 인증 토큰 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post("getToken")
     public getToken
@@ -33,6 +35,6 @@ export class FakeIamportUsersController
         assertType<typeof input>(input);
         
         const user: IIamportUser = FakeIamportUserAuth.issue(input);
-        return FakeIamportResponseProvider.returns(user);
+        return FakeIamportResponseProvider.success(user);
     }
 }

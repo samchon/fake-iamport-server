@@ -22,6 +22,8 @@ export class FakeIamportPaymentsController
      * 
      * @param imp_uid 대상 결제 기록의 {@link IIamportPayment.imp_uid}
      * @returns 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Get(":imp_uid")
     public at
@@ -33,7 +35,7 @@ export class FakeIamportPaymentsController
         FakeIamportUserAuth.authorize(request);
 
         const payment: IIamportPayment = FakeIamportStorage.payments.get(imp_uid);
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 
     /**
@@ -43,6 +45,8 @@ export class FakeIamportPaymentsController
      * 
      * @param input 결제 취소 입력 정보
      * @returns 취소된 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post("cancel")
     public cancel
@@ -57,6 +61,6 @@ export class FakeIamportPaymentsController
         const payment: IIamportPayment = FakeIamportStorage.payments.get(input.imp_uid);
         FakeIamportPaymentProvider.cancel(payment, input);
 
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 }

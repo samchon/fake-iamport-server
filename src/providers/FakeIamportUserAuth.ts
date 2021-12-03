@@ -4,19 +4,19 @@ import { v4 } from "uuid";
 
 import { IIamportUser } from "../api/structures/IIamportUser";
 
-import { Configuration } from "../Configuration";
+import { FakeIamportConfiguration } from "../FakeIamportConfiguration";
 import { FakeIamportStorage } from "./FakeIamportStorage";
 
 export namespace FakeIamportUserAuth
 {
     export function issue(accessor: IIamportUser.IAccessor): IIamportUser
     {
-        if (Configuration.authorize(accessor) === false)
+        if (FakeIamportConfiguration.authorize(accessor) === false)
             throw new nest.ForbiddenException("Wrong authorization key values.");
 
         const user: IIamportUser = {
             now: Date.now() / 1000,
-            expired_at: (Date.now() + Configuration.USER_EXPIRATION_TIME) / 1000,
+            expired_at: (Date.now() + FakeIamportConfiguration.USER_EXPIRATION_TIME) / 1000,
             access_token: v4()
         };
         FakeIamportStorage.users.set(user.access_token, user);

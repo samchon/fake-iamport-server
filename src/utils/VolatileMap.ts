@@ -42,6 +42,11 @@ export class VolatileMap<Key, T>
         return this.dict_.get(key);
     }
 
+    public has(key: Key): boolean
+    {
+        return this.dict_.has(key);
+    }
+
     public back(): T
     {
         if (this.size() === 0)
