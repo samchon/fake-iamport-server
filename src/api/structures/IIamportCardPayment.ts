@@ -8,8 +8,19 @@ import { IIamportPayment } from "./IIamportPayment";
 export interface IIamportCardPayment
     extends IIamportPayment.IBase<"card"|"samsung">
 {
+    /**
+     * 카드 식별자 코드.
+     */
     card_code: string;
+
+    /**
+     * 카드 이름.
+     */
     card_name: string;
+
+    /**
+     * 카드 번호.
+     */
     card_number: string;
 
     /**

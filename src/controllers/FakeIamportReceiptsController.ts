@@ -72,7 +72,7 @@ export class FakeIamportReceiptsController
             vat: payment.amount * 0.1,
             receipt_url: "https://github.com/samchon/fake-iamport-server",
             applied_at: Date.now() / 1000,
-            cancelled_at: null
+            cancelled_at: 0
         };
         FakeIamportStorage.receipts.set(imp_uid, receipt);
         payment.cash_receipt_issue = true;

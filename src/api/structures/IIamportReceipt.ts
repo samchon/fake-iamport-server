@@ -47,8 +47,10 @@ export interface IIamportReceipt
 
     /**
      * 현금영수증 취소 시간.
+     * 
+     * 리눅스 타임이 쓰이며, `null` 대신 0 을 씀.
      */
-    cancelled_at: number | null;
+    cancelled_at: number;
 }
 
 export namespace IIamportReceipt

@@ -74,7 +74,7 @@ export namespace IIamportPayment
         /**
          * 주문명, 누락 가능.
          */
-        name?: string;
+        name: string | null;
 
         /**
          * 결제 총액.
@@ -104,21 +104,21 @@ export namespace IIamportPayment
         // PAYMENT PRVIDER INFO
         channel: string;
         pg_provider: string;
-        emb_pg_provider?: string;
+        emb_pg_provider: string | null;
         pg_id: string;
         pg_tid: string;
         escrow: boolean;
         
         // BUYER
-        buyer_name?: string;
-        buyer_email?: string;
-        buyer_tel?: string;
-        buyer_addr?: string;
-        buyer_postcode?: string;
-        customer_uid?: string;
-        customer_uid_usage?: string;
-        custom_data?: string;
-        user_agent?: string;
+        buyer_name: string | null;
+        buyer_email: string | null;
+        buyer_tel: string | null;
+        buyer_addr: string | null;
+        buyer_postcode: string | null;
+        customer_uid: string | null;
+        customer_uid_usage: string | null;
+        custom_data: string | null;
+        user_agent: string | null;
         
         // PROPERTIES
         /**
@@ -128,27 +128,35 @@ export namespace IIamportPayment
 
         /**
          * 결제 신청 일시.
+         * 
+         * 리눅스 타임이 쓰임.
          */
         started_at: number;
 
         /**
          * 결제 (지불) 완료 일시.
+         * 
+         * 리눅스 타임이 쓰이며, `null` 대신 0 을 씀.
          */
-        paid_at?: number;
+        paid_at: number;
 
         /**
          * 결제 실패 일시.
+         * 
+         * 리눅스 타임이 쓰이며, `null` 대신 0 을 씀.
          */
-        failed_at?: number;
+        failed_at: number;
 
         /**
          * 결제 취소 일시.
+         * 
+         * 리눅스 타임이 쓰이며, `null` 대신 0 을 씀.
          */
-        cancelled_at?: number;
+        cancelled_at: number;
 
         // CANCELLATIONS
-        fail_reason?: SVGStringList;
-        cancel_reason?: string;
+        fail_reason: string | null;
+        cancel_reason: string | null;
         cancel_history: IIamportPaymentCancel[];
 
         /**

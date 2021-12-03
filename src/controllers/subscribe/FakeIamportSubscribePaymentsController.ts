@@ -81,24 +81,30 @@ export class FakeIampotSubscribePaymentsController
             // PAYMENT PROVIDER INFO
             channel: Math.random() < .5 ? "pc" : "mobile",
             pg_provider: "somewhere",
+            emb_pg_provider: null,
             pg_id,
             pg_tid: pg_id,
             escrow: false,
 
             // BUYER
-            buyer_name: input.buyer_name,
-            buyer_tel: input.buyer_tel,
-            buyer_email: input.buyer_email,
-            buyer_addr: input.buyer_addr,
-            customer_uid: input.customer_uid,
-            customer_uid_usage: input.customer_uid ? "issue" : undefined,
-            custom_data: input.custom_data,
+            buyer_name: input.buyer_name || null,
+            buyer_tel: input.buyer_tel || null,
+            buyer_email: input.buyer_email || null,
+            buyer_addr: input.buyer_addr || null,
+            buyer_postcode: input.buyer_postcode || null,
+            customer_uid: input.customer_uid || null,
+            customer_uid_usage: input.customer_uid ? "issue" : null,
+            custom_data: input.custom_data || null,
             user_agent: "Test Automation",
 
             // TIMESTAMPS
             status: "paid",
             started_at: Date.now() / 1000,
             paid_at: Date.now() / 1000,
+            failed_at: 0,
+            fail_reason: null,
+            cancelled_at: 0,
+            cancel_reason: null,
             cancel_history: [],
 
             // HIDDEN
@@ -161,24 +167,30 @@ export class FakeIampotSubscribePaymentsController
             // PAYMENT PROVIDER INFO
             channel: Math.random() < .5 ? "pc" : "mobile",
             pg_provider: "somewhere",
+            emb_pg_provider: null,
             pg_id,
             pg_tid: pg_id,
             escrow: false,
 
             // BUYER
-            buyer_name: input.buyer_name || subscription.customer_name,
-            buyer_tel: input.buyer_tel || subscription.customer_tel,
-            buyer_email: input.buyer_email || subscription.customer_email,
-            buyer_addr: input.buyer_addr || subscription.customer_addr,
+            buyer_name: input.buyer_name || subscription.customer_name || null,
+            buyer_tel: input.buyer_tel || subscription.customer_tel || null,
+            buyer_email: input.buyer_email || subscription.customer_email || null,
+            buyer_addr: input.buyer_addr || subscription.customer_addr || null,
+            buyer_postcode: input.buyer_postcode || subscription.customer_postcode || null,
             customer_uid: subscription.customer_uid,
             customer_uid_usage: "issue",
-            custom_data: input.custom_data,
+            custom_data: input.custom_data || null,
             user_agent: "Test Automation",
 
             // TIMESTAMPS
             status: "paid",
             started_at: Date.now() / 1000,
             paid_at: Date.now() / 1000,
+            failed_at: 0,
+            fail_reason: null,
+            cancelled_at: 0,
+            cancel_reason: null,
             cancel_history: [],
 
             // HIDDEN
