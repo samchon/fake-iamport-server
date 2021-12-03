@@ -4,7 +4,7 @@ import { IIamportPayment } from "../api/structures/IIamportPayment";
 import { IIamportPaymentCancel } from "../api/structures/IIamportPaymentCancel";
 import { IIamportVBankPayment } from "../api/structures/IIamportVBankPayment";
 
-import { Configuration } from "../Configuration";
+import { FakeIamportConfiguration } from "../FakeIamportConfiguration";
 import { FakeIamportStorage } from "./FakeIamportStorage";
 
 export namespace FakeIamportPaymentProvider
@@ -58,7 +58,7 @@ export namespace FakeIamportPaymentProvider
         };
         FakeIamportStorage.webhooks.set(webhook.imp_uid, webhook);
 
-        await fetch(payment.notice_url || Configuration.WEBHOOK_URL, {
+        await fetch(payment.notice_url || FakeIamportConfiguration.WEBHOOK_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

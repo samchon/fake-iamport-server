@@ -30,6 +30,8 @@ export class FakeIamportSubscribeConsumersController
      * @param customer_uid 고객 (간편 결제 카드) 식별자 키
      * @param input 카드 입력 정보
      * @returns 간편 결제 카드 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post(":customer_uid")
     public store
@@ -63,7 +65,7 @@ export class FakeIamportSubscribeConsumersController
         FakeIamportStorage.subscriptions.set(customer_uid, subscription);
 
         // RETURNS
-        return FakeIamportResponseProvider.returns(subscription);
+        return FakeIamportResponseProvider.success(subscription);
     }
 
     /**
@@ -73,6 +75,8 @@ export class FakeIamportSubscribeConsumersController
      * 
      * @param customer_uid 고객 (간편 결제 카드) 식별자 키
      * @returns 삭제된 간편 결제 카드 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Delete(":customer_uid")
     public erase
@@ -89,6 +93,6 @@ export class FakeIamportSubscribeConsumersController
         FakeIamportStorage.subscriptions.erase(customer_uid);
 
         // RETURNS
-        return FakeIamportResponseProvider.returns(subscription);
+        return FakeIamportResponseProvider.success(subscription);
     }
 }

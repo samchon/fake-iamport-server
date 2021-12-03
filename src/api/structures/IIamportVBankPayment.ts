@@ -64,7 +64,7 @@ export namespace IIamportVBankPayment
         buyer_email?: string;
         buyer_tel?: string;
         buyer_addr?: string;
-        buyder_postcode?: string;
+        buyer_postcode?: string;
         pg?: string;
 
         /**

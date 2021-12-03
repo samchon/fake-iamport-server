@@ -14,11 +14,11 @@ export interface IIamportSubscription
     card_code: string;
     card_number: string;
     card_type: string;
-    customer_name?: string;
-    customer_tel?: string;
-    customer_email?: string;
-    customer_addr?: string;
-    customer_postcode?: string;
+    customer_name: string | null;
+    customer_tel: string | null;
+    customer_email: string | null;
+    customer_addr: string | null;
+    customer_postcode: string | null;
     inserted: number;
     updated: number;
 }

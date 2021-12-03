@@ -23,6 +23,8 @@ export class FakeIamportVbanksController
      * 
      * @param input 가상 계좌 입력 정보
      * @returns 가상 계좌 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post()
     public store
@@ -51,7 +53,7 @@ export class FakeIamportVbanksController
             currency: "KRW",
             merchant_uid: input.merchant_uid,
             imp_uid: v4(),
-            name: input.name,
+            name: input.name || null,
             amount: input.amount,
             cancel_amount: 0,
             receipt_url: "https://github.com/samchon/fake-iamport-server",
@@ -60,23 +62,30 @@ export class FakeIamportVbanksController
             // PAYMENT PROVIDER INFO
             channel: Math.random() < .5 ? "pc" : "mobile",
             pg_provider: "somewhere",
+            emb_pg_provider: null,
             pg_id,
             pg_tid: pg_id,
             escrow: false,
 
             // BUYER
-            buyer_name: input.buyer_name,
-            buyer_tel: input.buyer_tel,
-            buyer_email: input.buyer_email,
-            buyer_addr: input.buyer_addr,
+            buyer_name: input.buyer_name || null,
+            buyer_tel: input.buyer_tel || null,
+            buyer_email: input.buyer_email || null,
+            buyer_addr: input.buyer_addr || null,
+            buyer_postcode: input.buyer_postcode || null,
             customer_uid: v4(),
             customer_uid_usage: "issue",
-            custom_data: input.custom_data,
+            custom_data: input.custom_data || null,
             user_agent: "Test Automation",
 
             // TIMESTAMPS
             status: "ready",
             started_at: Date.now() / 1000,
+            paid_at: 0,
+            failed_at: 0,
+            fail_reason: null,
+            cancelled_at: 0,
+            cancel_reason: null,
             cancel_history: [],
 
             // HIDDEN
@@ -85,7 +94,7 @@ export class FakeIamportVbanksController
         FakeIamportPaymentProvider.store(payment);
 
         // RETURNS
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 
     /**
@@ -93,6 +102,8 @@ export class FakeIamportVbanksController
      * 
      * @param input 가상 계좌 편집 입력 정보
      * @returns 편집된 가상 계좌 결제 정보
+     * 
+     * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Put()
     public update
@@ -118,6 +129,6 @@ export class FakeIamportVbanksController
 
         // RETURNS WITH INFORM
         FakeIamportPaymentProvider.webhook(payment);
-        return FakeIamportResponseProvider.returns(payment);
+        return FakeIamportResponseProvider.success(payment);
     }
 }

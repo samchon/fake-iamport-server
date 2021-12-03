@@ -15,7 +15,7 @@ import { OutOfRange } from "tstl/exception/OutOfRange";
  * 
  * @author Samchon
  */
-export namespace Configuration
+export namespace FakeIamportConfiguration
 {
     /**
      * @internal
