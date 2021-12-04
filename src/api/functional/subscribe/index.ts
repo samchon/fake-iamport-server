@@ -3,6 +3,6 @@
  * @module api.functional.subscribe
  */
 //================================================================
-export * as consumers from "./consumers";
+export * as customers from "./customers";
 export * as payments from "./payments";
 
