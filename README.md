@@ -12,12 +12,13 @@
   - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
   - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
   - 예제 코드
-    - 가상 계좌 결제: [src/test/features/examples/test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
-    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+    - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
+    - 가상 계좌 결제: [test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
+    - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
     - 간편 결제
-      - [src/test/features/examples/test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - [src/test/features/examples/test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-    - 현금 영수증 발행하기: [src/test/features/examples/test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+      - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
+    - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
 
 ```typescript
 import { v4 } from "uuid";
@@ -157,12 +158,13 @@ npm install --save fake-iamport-server-api
   - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
   - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
   - 예제 코드
-    - 가상 계좌 결제: [src/test/features/examples/test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
-    - 카드 결제: [src/test/features/examples/test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+    - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
+    - 가상 계좌 결제: [test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
+    - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
     - 간편 결제
-      - [src/test/features/examples/test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - [src/test/features/examples/test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-    - 현금 영수증 발행하기: [src/test/features/examples/test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+      - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
+    - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
 
 ```typescript
 export async function test_fake_subscription_payment_again(): Promise<IIamportCardPayment>
