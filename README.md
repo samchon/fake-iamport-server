@@ -9,16 +9,22 @@
 
 또한, [iamport-server-api](https://www.npmjs.com/package/iamport-server-api) 는 아임포트 서버와 연동할 수 있는 SDK 라이브러리로써, `fake-iamport-server` 의 소스코드를 토대로 [Nestia](https://github.com/samchon/nestia) 를 이용하여 빌드하였다. 그리고 이를 통하여 가짜 아임포트 서버 뿐 아니라, 진짜 아임포트 서버, 양쪽 모두와 연동할 수 있다.
 
-  - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
-  - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
-  - 예제 코드
-    - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
-    - 가상 계좌 결제: [test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
-    - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
-    - 간편 결제
-      - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-    - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+  - 서버 주소: http://localhost:10851
+  - 매뉴얼
+    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
+    - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
+    - 예제 코드
+      - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
+      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_vbank_payment.ts)
+      - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+      - 간편 결제 등록
+        - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
+        - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+  - 연관 저장소
+    - [samchon/netia](https://github.com/samchon/nestia) - Automatic SDK generator for the NestJS
+    - [samchon/fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server): 가짜 토스 페이먼츠 서버
+    - [samchon/payments](https://github.com/samchon/payments): MSA 형태의 통합 결제 서버
 
 ```typescript
 import { v4 } from "uuid";
@@ -155,16 +161,22 @@ npm install --save fake-iamport-server-api
 
 마지막으로 실 서버를 배포하며, 연동 대상 서버를 가짜에서 진짜로 교체해주면 된다.
 
-  - 자료 구조 매뉴얼: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
-  - API 함수 매뉴얼: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
-  - 예제 코드
-    - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
-    - 가상 계좌 결제: [test_fake_virtual_account_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_virtual_account_payment.ts)
-    - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
-    - 간편 결제
-      - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-    - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+  - 서버 주소: http://localhost:10851
+  - 매뉴얼
+    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
+    - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
+    - 예제 코드
+      - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
+      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_vbank_payment.ts)
+      - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+      - 간편 결제 등록
+        - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
+        - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+  - 연관 저장소
+    - [samchon/netia](https://github.com/samchon/nestia) - Automatic SDK generator for the NestJS
+    - [samchon/fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server): 가짜 토스 페이먼츠 서버
+    - [samchon/payments](https://github.com/samchon/payments): MSA 형태의 통합 결제 서버
 
 ```typescript
 export async function test_fake_subscription_payment_again(): Promise<IIamportCardPayment>
