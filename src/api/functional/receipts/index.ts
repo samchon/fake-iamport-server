@@ -3,14 +3,11 @@
  * @module api.functional.receipts
  */
 //================================================================
-import { AesPkcs5 } from "./../../__internal/AesPkcs5";
-import { Fetcher } from "./../../__internal/Fetcher";
-import { Primitive } from "./../../Primitive";
-import type { IConnection } from "./../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
 import type { IIamportReceipt } from "./../../structures/IIamportReceipt";
-
 
 /**
  * 현금 영수증 조회하기.
@@ -33,7 +30,7 @@ export function at
     return Fetcher.fetch
     (
         connection,
-        at.CONFIG,
+        at.ENCRYPTED,
         at.METHOD,
         at.path(imp_uid)
     );
@@ -42,12 +39,11 @@ export namespace at
 {
     export type Output = Primitive<IIamportResponse<IIamportReceipt>>;
 
-
-    export const METHOD = "GET";
-    export const PATH = "/receipts/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "GET" as const;
+    export const PATH: string = "/receipts/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string
@@ -79,7 +75,7 @@ export function store
     return Fetcher.fetch
     (
         connection,
-        store.CONFIG,
+        store.ENCRYPTED,
         store.METHOD,
         store.path(imp_uid),
         input
@@ -90,12 +86,11 @@ export namespace store
     export type Input = Primitive<IIamportReceipt.IStore>;
     export type Output = Primitive<IIamportResponse<IIamportReceipt>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/receipts/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/receipts/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string
@@ -125,7 +120,7 @@ export function erase
     return Fetcher.fetch
     (
         connection,
-        erase.CONFIG,
+        erase.ENCRYPTED,
         erase.METHOD,
         erase.path(imp_uid)
     );
@@ -134,12 +129,11 @@ export namespace erase
 {
     export type Output = Primitive<IIamportResponse<IIamportReceipt>>;
 
-
-    export const METHOD = "DELETE";
-    export const PATH = "/receipts/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "DELETE" as const;
+    export const PATH: string = "/receipts/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string

@@ -3,15 +3,12 @@
  * @module api.functional.payments
  */
 //================================================================
-import { AesPkcs5 } from "./../../__internal/AesPkcs5";
-import { Fetcher } from "./../../__internal/Fetcher";
-import { Primitive } from "./../../Primitive";
-import type { IConnection } from "./../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
 import type { IIamportPayment } from "./../../structures/IIamportPayment";
 import type { IIamportPaymentCancel } from "./../../structures/IIamportPaymentCancel";
-
 
 /**
  * 결제 기록 열람하기.
@@ -36,7 +33,7 @@ export function at
     return Fetcher.fetch
     (
         connection,
-        at.CONFIG,
+        at.ENCRYPTED,
         at.METHOD,
         at.path(imp_uid)
     );
@@ -45,12 +42,11 @@ export namespace at
 {
     export type Output = Primitive<IIamportResponse<IIamportPayment>>;
 
-
-    export const METHOD = "GET";
-    export const PATH = "/payments/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "GET" as const;
+    export const PATH: string = "/payments/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string
@@ -82,7 +78,7 @@ export function cancel
     return Fetcher.fetch
     (
         connection,
-        cancel.CONFIG,
+        cancel.ENCRYPTED,
         cancel.METHOD,
         cancel.path(),
         input
@@ -93,12 +89,11 @@ export namespace cancel
     export type Input = Primitive<IIamportPaymentCancel.IStore>;
     export type Output = Primitive<IIamportResponse<IIamportPayment>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/payments/cancel";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/payments/cancel";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string

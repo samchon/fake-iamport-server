@@ -3,14 +3,11 @@
  * @module api.functional.subscribe.customers
  */
 //================================================================
-import { AesPkcs5 } from "./../../../__internal/AesPkcs5";
-import { Fetcher } from "./../../../__internal/Fetcher";
-import { Primitive } from "./../../../Primitive";
-import type { IConnection } from "./../../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportResponse } from "./../../../structures/IIamportResponse";
 import type { IIamportSubscription } from "./../../../structures/IIamportSubscription";
-
 
 /**
  * 간편 결제 카드 정보 조회하기.
@@ -36,7 +33,7 @@ export function at
     return Fetcher.fetch
     (
         connection,
-        at.CONFIG,
+        at.ENCRYPTED,
         at.METHOD,
         at.path(customer_uid)
     );
@@ -45,12 +42,11 @@ export namespace at
 {
     export type Output = Primitive<IIamportResponse<IIamportSubscription>>;
 
-
-    export const METHOD = "GET";
-    export const PATH = "/subscribe/customers/:customer_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "GET" as const;
+    export const PATH: string = "/subscribe/customers/:customer_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(customer_uid: string): string
@@ -91,7 +87,7 @@ export function store
     return Fetcher.fetch
     (
         connection,
-        store.CONFIG,
+        store.ENCRYPTED,
         store.METHOD,
         store.path(customer_uid),
         input
@@ -102,12 +98,11 @@ export namespace store
     export type Input = Primitive<IIamportSubscription.IStore>;
     export type Output = Primitive<IIamportResponse<IIamportSubscription>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/subscribe/customers/:customer_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/subscribe/customers/:customer_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(customer_uid: string): string
@@ -139,7 +134,7 @@ export function erase
     return Fetcher.fetch
     (
         connection,
-        erase.CONFIG,
+        erase.ENCRYPTED,
         erase.METHOD,
         erase.path(customer_uid)
     );
@@ -148,12 +143,11 @@ export namespace erase
 {
     export type Output = Primitive<IIamportResponse<IIamportSubscription>>;
 
-
-    export const METHOD = "DELETE";
-    export const PATH = "/subscribe/customers/:customer_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "DELETE" as const;
+    export const PATH: string = "/subscribe/customers/:customer_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(customer_uid: string): string

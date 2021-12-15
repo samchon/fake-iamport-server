@@ -3,14 +3,11 @@
  * @module api.functional.certifications.otp
  */
 //================================================================
-import { AesPkcs5 } from "./../../../__internal/AesPkcs5";
-import { Fetcher } from "./../../../__internal/Fetcher";
-import { Primitive } from "./../../../Primitive";
-import type { IConnection } from "./../../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportCertification } from "./../../../structures/IIamportCertification";
 import type { IIamportResponse } from "./../../../structures/IIamportResponse";
-
 
 /**
  * 본인인증 요청하기.
@@ -42,7 +39,7 @@ export function request
     return Fetcher.fetch
     (
         connection,
-        request.CONFIG,
+        request.ENCRYPTED,
         request.METHOD,
         request.path(),
         input
@@ -53,12 +50,11 @@ export namespace request
     export type Input = Primitive<IIamportCertification.IStore>;
     export type Output = Primitive<IIamportResponse<IIamportCertification.IAccessor>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/certifications/otp/request";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/certifications/otp/request";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string
@@ -98,7 +94,7 @@ export function confirm
     return Fetcher.fetch
     (
         connection,
-        confirm.CONFIG,
+        confirm.ENCRYPTED,
         confirm.METHOD,
         confirm.path(imp_uid),
         input
@@ -109,12 +105,11 @@ export namespace confirm
     export type Input = Primitive<IIamportCertification.IConfirm>;
     export type Output = Primitive<IIamportResponse<IIamportCertification>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/certifications/otp/confirm/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/certifications/otp/confirm/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string

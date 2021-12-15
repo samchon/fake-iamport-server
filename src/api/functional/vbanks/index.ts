@@ -3,14 +3,11 @@
  * @module api.functional.vbanks
  */
 //================================================================
-import { AesPkcs5 } from "./../../__internal/AesPkcs5";
-import { Fetcher } from "./../../__internal/Fetcher";
-import { Primitive } from "./../../Primitive";
-import type { IConnection } from "./../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportVBankPayment } from "./../../structures/IIamportVBankPayment";
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
-
 
 /**
  * 가상 계좌 발급하기.
@@ -33,7 +30,7 @@ export function store
     return Fetcher.fetch
     (
         connection,
-        store.CONFIG,
+        store.ENCRYPTED,
         store.METHOD,
         store.path(),
         input
@@ -44,12 +41,11 @@ export namespace store
     export type Input = Primitive<IIamportVBankPayment.IStore>;
     export type Output = Primitive<IIamportResponse<IIamportVBankPayment>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/vbanks";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/vbanks";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string
@@ -79,7 +75,7 @@ export function update
     return Fetcher.fetch
     (
         connection,
-        update.CONFIG,
+        update.ENCRYPTED,
         update.METHOD,
         update.path(),
         input
@@ -90,12 +86,11 @@ export namespace update
     export type Input = Primitive<IIamportVBankPayment.IUpdate>;
     export type Output = Primitive<IIamportResponse<IIamportVBankPayment>>;
 
-
-    export const METHOD = "PUT";
-    export const PATH = "/vbanks";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "PUT" as const;
+    export const PATH: string = "/vbanks";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string
