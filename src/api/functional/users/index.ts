@@ -3,14 +3,11 @@
  * @module api.functional.users
  */
 //================================================================
-import { AesPkcs5 } from "./../../__internal/AesPkcs5";
-import { Fetcher } from "./../../__internal/Fetcher";
-import { Primitive } from "./../../Primitive";
-import type { IConnection } from "./../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportUser } from "./../../structures/IIamportUser";
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
-
 
 /**
  * 유저 인증 토큰 발행하기.
@@ -40,7 +37,7 @@ export function getToken
     return Fetcher.fetch
     (
         connection,
-        getToken.CONFIG,
+        getToken.ENCRYPTED,
         getToken.METHOD,
         getToken.path(),
         input
@@ -51,12 +48,11 @@ export namespace getToken
     export type Input = Primitive<IIamportUser.IAccessor>;
     export type Output = Primitive<IIamportResponse<IIamportUser>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/users/getToken";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/users/getToken";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string

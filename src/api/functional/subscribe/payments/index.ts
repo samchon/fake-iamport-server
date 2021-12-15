@@ -3,15 +3,12 @@
  * @module api.functional.subscribe.payments
  */
 //================================================================
-import { AesPkcs5 } from "./../../../__internal/AesPkcs5";
-import { Fetcher } from "./../../../__internal/Fetcher";
-import { Primitive } from "./../../../Primitive";
-import type { IConnection } from "./../../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportSubscription } from "./../../../structures/IIamportSubscription";
 import type { IIamportResponse } from "./../../../structures/IIamportResponse";
 import type { IIamportCardPayment } from "./../../../structures/IIamportCardPayment";
-
 
 /**
  * 카드로 결제하기, 더불어 간편 결제용으로 등록 가능.
@@ -50,7 +47,7 @@ export function onetime
     return Fetcher.fetch
     (
         connection,
-        onetime.CONFIG,
+        onetime.ENCRYPTED,
         onetime.METHOD,
         onetime.path(),
         input
@@ -61,12 +58,11 @@ export namespace onetime
     export type Input = Primitive<IIamportSubscription.IOnetime>;
     export type Output = Primitive<IIamportResponse<IIamportCardPayment>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/subscribe/payments/onetime";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/subscribe/payments/onetime";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string
@@ -106,7 +102,7 @@ export function again
     return Fetcher.fetch
     (
         connection,
-        again.CONFIG,
+        again.ENCRYPTED,
         again.METHOD,
         again.path(),
         input
@@ -117,12 +113,11 @@ export namespace again
     export type Input = Primitive<IIamportSubscription.IAgain>;
     export type Output = Primitive<IIamportResponse<IIamportCardPayment>>;
 
-
-    export const METHOD = "POST";
-    export const PATH = "/subscribe/payments/again";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "POST" as const;
+    export const PATH: string = "/subscribe/payments/again";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(): string

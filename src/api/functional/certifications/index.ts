@@ -3,14 +3,11 @@
  * @module api.functional.certifications
  */
 //================================================================
-import { AesPkcs5 } from "./../../__internal/AesPkcs5";
-import { Fetcher } from "./../../__internal/Fetcher";
-import { Primitive } from "./../../Primitive";
-import type { IConnection } from "./../../IConnection";
+import { AesPkcs5, Fetcher, Primitive } from "nestia-fetcher";
+import type { IConnection } from "nestia-fetcher";
 
 import type { IIamportResponse } from "./../../structures/IIamportResponse";
 import type { IIamportCertification } from "./../../structures/IIamportCertification";
-
 export * as otp from "./otp";
 
 /**
@@ -40,7 +37,7 @@ export function at
     return Fetcher.fetch
     (
         connection,
-        at.CONFIG,
+        at.ENCRYPTED,
         at.METHOD,
         at.path(imp_uid)
     );
@@ -49,12 +46,11 @@ export namespace at
 {
     export type Output = Primitive<IIamportResponse<IIamportCertification>>;
 
-
-    export const METHOD = "GET";
-    export const PATH = "/certifications/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "GET" as const;
+    export const PATH: string = "/certifications/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string
@@ -83,7 +79,7 @@ export function erase
     return Fetcher.fetch
     (
         connection,
-        erase.CONFIG,
+        erase.ENCRYPTED,
         erase.METHOD,
         erase.path(imp_uid)
     );
@@ -92,12 +88,11 @@ export namespace erase
 {
     export type Output = Primitive<IIamportResponse<IIamportCertification>>;
 
-
-    export const METHOD = "DELETE";
-    export const PATH = "/certifications/:imp_uid";
-    export const CONFIG = {
-        input_encrypted: false,
-        output_encrypted: false,
+    export const METHOD = "DELETE" as const;
+    export const PATH: string = "/certifications/:imp_uid";
+    export const ENCRYPTED: Fetcher.IEncrypted = {
+        request: false,
+        response: false,
     };
 
     export function path(imp_uid: string): string

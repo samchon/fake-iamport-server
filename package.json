@@ -1,6 +1,6 @@
 {
   "name": "fake-iamport-server",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Fake iamport server for testing",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -34,7 +34,7 @@
     "@types/uuid": "^8.3.0",
     "cli": "^1.0.1",
     "copyfiles": "^2.4.1",
-    "nestia": "^0.4.0",
+    "nestia": "^1.0.0",
     "pm2": "^4.5.6",
     "rimraf": "^3.0.2",
     "serialize-error": "^9.0.0",
@@ -46,7 +46,7 @@
     "typescript-is": "^0.19.0"
   },
   "dependencies": {
-    "encrypted-nestjs": "^0.1.7",
+    "nestia-helper": "^1.0.0",
     "node-fetch": "^2.6.1",
     "source-map-support": "^0.5.19",
     "tstl": "^2.5.0",
