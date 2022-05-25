@@ -291,13 +291,29 @@ npm run test
 
 ## 4. Appendix
 ### 4.1. Nestia
-Automatic SDK generator for the NestJS.
+Automatic `SDK` and `Swagger` generator for the `NestJS`, evolved than ever.
 
   - https://github.com/samchon/nestia
 
 Nesita 는 NestJS 로 만든 백엔드 서버 프로그램을 컴파일러 수준에서 분석, 클라이언트가 사용할 수 있는 SDK 라이브러리를 만들어주는 프로그램이다. `fake-iamport-server` 가 아임포트의 API 를 흉내내어 만든 가짜 서버인데, 뜬금 클라이언트가 진짜 아임포트와의 연동에 사용할 수 있는 SDK 라이브러리가 함께 제공되는 이유도 바로 이 덕분이다.
 
 때문에 만일 귀하가 아임포트와 연동하는 백엔드 서버를 개발 중이라면, `fake-iamport-server` 뿐 아니라 [Nestia](https://github.com/samchon/nestia) 도 함께 사용해보는 것이 어떠한가? 귀하의 백엔드 서버 또한 `fake-iamport-server` 처럼 클라이언트 개발자가 사용할 수 있는 SDK 라이브러리를 자동으로 빌드하여 배포할 수 있으니, 백엔드 개발자는 API 문서를 따로 만들고 클라이언트 개발자는 중복 DTO 타입과 API 연동 함수를 개발하는 등의 번거로운 일을 일절 하지 않아도 된다.
+
+물론 Nestia 는 Swagger 또한 빌드할 수 있는데, 본 저장소 `fake-iamport-server` 로부터 빌드된 Swagger 가 아임포트 공식 Swagger 보다 퀄리티가 높고 문서화 수준이 상세한 것도 바로 이 때문이다. Swagger 를 사람이 손으로 작성하는게 아니라, Nestia 가 컴파일러 수준에서 백엔드 소스 코드와 DTO 를 분석하여 자동으로 생성해주었기 때문인 것.
+
+Components | `nestia`::SDK | `nestia`::swagger | `@nestjs/swagger`
+-----------|---|---|---
+Pure DTO interface | ✔ | ✔ | ❌
+Description comments | ✔ | ✔ | ❌
+Simple structure | ✔ | ✔ | ✔
+Generic type | ✔ | ✔ | ❌
+Union type | ✔ | ✔ | ▲
+Intersection type | ✔ | ✔ | ▲
+Conditional type | ✔ | ▲ | ❌
+Auto completion | ✔ | ❌ | ❌
+Type hints | ✔ | ❌ | ❌
+2x faster `JSON.stringify()` | ✔ | ❌ | ❌
+Ensure type safety | ✅ | ❌ | ❌
 
 ### 4.2. Expiration
 `fake-iamport-server` 는 결제 데이터를 메모리에 임시 기록한다.
@@ -335,3 +351,14 @@ https://www.archisketch.com/
 I have special thanks to the Archidraw, where I'm working for.
 
 The Archidraw is a great IT company developing 3D interior editor and lots of solutions based on the 3D assets. Also, the Archidraw is the first company who had adopted `fake-iamport-server` on their commercial backend project, even `fake-iamport-server` was in the alpha level.
+
+> 저희 회사 "아키드로우" 에서, 삼촌과 함께 일할 프론트 개발자 분들을, 최고의 대우로 모십니다.
+>
+> "아키드로우" 는 3D (인테리어) 에디터 및 이에 관한 파생 솔루션들을 만드는 회사입니다. 다만 저희 회사의 주력 제품이 3D 에디터라 하여, 반드시 3D 내지 랜더링에 능숙해야 하는 것은 아니니, 일반적인 프론트 개발자 분들도 망설임없이 지원해주십시오.
+>
+> 그리고 저희 회사는 분위기가 다들 친하고 즐겁게 지내는 분위기입니다. 더하여 위 [nestia](https://github.com/samchon/nestia) 나 [typescript-json](https://github.com/samchon/typescript-json) 및 [payments](https://github.com/archidraw/payments) 등, 제법 합리적(?)이고 재미난 프로젝트들을 다양하게 체험해보실 수 있습니다.
+>
+> - 회사소개서: [archidraw.pdf](https://github.com/archidraw/payments/files/7696710/archidraw.pdf)
+> - 기술 스택: React + TypeScript
+> - 이력서: 자유 양식
+> - 지원처: samchon@archisketch.com
