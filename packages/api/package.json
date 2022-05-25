@@ -1,6 +1,6 @@
 {
   "name": "iamport-server-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "API for iamport server",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/samchon/fake-iamport-server#readme",
   "dependencies": {
-    "nestia-fetcher": "^2.0.0",
+    "nestia-fetcher": "^2.0.1",
     "tstl": "^2.5.3"
   },
   "keywords": [

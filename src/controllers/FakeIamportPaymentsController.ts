@@ -13,52 +13,50 @@ import { FakeIamportPaymentProvider } from "../providers/FakeIamportPaymentProvi
 import { assertType } from "typescript-is";
 
 @nest.Controller("payments")
-export class FakeIamportPaymentsController
-{
+export class FakeIamportPaymentsController {
     /**
      * 결제 기록 열람하기.
-     * 
+     *
      * 아임포트를 통하여 발생한 결제 기록을 열람한다.
-     * 
+     *
      * @param imp_uid 대상 결제 기록의 {@link IIamportPayment.imp_uid}
      * @returns 결제 정보
-     * 
+     *
      * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Get(":imp_uid")
-    public at
-        (
-            @nest.Request() request: express.Request,
-            @helper.TypedParam("imp_uid", "string") imp_uid: string
-        ): IIamportResponse<IIamportPayment>
-    {
+    public at(
+        @nest.Request() request: express.Request,
+        @helper.TypedParam("imp_uid", "string") imp_uid: string,
+    ): IIamportResponse<IIamportPayment> {
         FakeIamportUserAuth.authorize(request);
 
-        const payment: IIamportPayment = FakeIamportStorage.payments.get(imp_uid);
+        const payment: IIamportPayment =
+            FakeIamportStorage.payments.get(imp_uid);
         return FakeIamportResponseProvider.success(payment);
     }
 
     /**
      * 결제 취소하기.
-     * 
+     *
      * 만약 가상 계좌를 통한 결제였다면, 반드시 환불 계좌 정보를 입력해줘야 한다.
-     * 
+     *
      * @param input 결제 취소 입력 정보
      * @returns 취소된 결제 정보
-     * 
+     *
      * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post("cancel")
-    public cancel
-        (
-            @nest.Request() request: express.Request,
-            @nest.Body() input: IIamportPaymentCancel.IStore
-        ): IIamportResponse<IIamportPayment>
-    {
+    public cancel(
+        @nest.Request() request: express.Request,
+        @nest.Body() input: IIamportPaymentCancel.IStore,
+    ): IIamportResponse<IIamportPayment> {
         assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
-        const payment: IIamportPayment = FakeIamportStorage.payments.get(input.imp_uid);
+        const payment: IIamportPayment = FakeIamportStorage.payments.get(
+            input.imp_uid,
+        );
         FakeIamportPaymentProvider.cancel(payment, input);
 
         return FakeIamportResponseProvider.success(payment);

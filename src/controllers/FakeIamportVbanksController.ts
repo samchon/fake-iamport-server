@@ -16,27 +16,24 @@ import { FakeIamportStorage } from "../providers/FakeIamportStorage";
 import { RandomGenerator } from "../utils/RandomGenerator";
 
 @nest.Controller("vbanks")
-export class FakeIamportVbanksController
-{
+export class FakeIamportVbanksController {
     /**
      * 가상 계좌 발급하기.
-     * 
+     *
      * @param input 가상 계좌 입력 정보
      * @returns 가상 계좌 결제 정보
-     * 
+     *
      * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Post()
-    public store
-        (
-            @nest.Request() request: express.Request,
-            @nest.Body() input: IIamportVBankPayment.IStore
-        ): IIamportResponse<IIamportVBankPayment>
-    {
+    public store(
+        @nest.Request() request: express.Request,
+        @nest.Body() input: IIamportVBankPayment.IStore,
+    ): IIamportResponse<IIamportVBankPayment> {
         // VALIDATE
-        assertType<typeof input>(input);     
+        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
-        
+
         // CONSTRUCTION
         const pg_id: string = v4();
         const payment: IIamportVBankPayment = {
@@ -60,7 +57,7 @@ export class FakeIamportVbanksController
             cash_receipt_issue: true,
 
             // PAYMENT PROVIDER INFO
-            channel: Math.random() < .5 ? "pc" : "mobile",
+            channel: Math.random() < 0.5 ? "pc" : "mobile",
             pg_provider: "somewhere",
             emb_pg_provider: null,
             pg_id,
@@ -89,7 +86,7 @@ export class FakeIamportVbanksController
             cancel_history: [],
 
             // HIDDEN
-            notice_url: input.notice_url
+            notice_url: input.notice_url,
         };
         FakeIamportPaymentProvider.store(payment);
 
@@ -99,33 +96,33 @@ export class FakeIamportVbanksController
 
     /**
      * 가상 계좌 편집하기.
-     * 
+     *
      * @param input 가상 계좌 편집 입력 정보
      * @returns 편집된 가상 계좌 결제 정보
-     * 
+     *
      * @author Jeongho Nam - https://github.com/samchon
      */
     @helper.TypedRoute.Put()
-    public update
-        (
-            @nest.Request() request: express.Request,
-            @nest.Body() input: IIamportVBankPayment.IUpdate
-        ): IIamportResponse<IIamportVBankPayment>
-    {
+    public update(
+        @nest.Request() request: express.Request,
+        @nest.Body() input: IIamportVBankPayment.IUpdate,
+    ): IIamportResponse<IIamportVBankPayment> {
         // VALIDATE
         assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         // GET PAYMENT RECORD
-        const payment: IIamportPayment = FakeIamportStorage.payments.get(input.imp_uid);
+        const payment: IIamportPayment = FakeIamportStorage.payments.get(
+            input.imp_uid,
+        );
         if (payment.pay_method !== "vbank")
-            throw new nest.UnprocessableEntityException("Not a virtual bank payment.");
+            throw new nest.UnprocessableEntityException(
+                "Not a virtual bank payment.",
+            );
 
         // MODIFY
-        if (input.amount)
-            payment.amount = input.amount;
-        if (input.vbank_due)
-            payment.vbank_date = input.vbank_due;
+        if (input.amount) payment.amount = input.amount;
+        if (input.vbank_due) payment.vbank_date = input.vbank_due;
 
         // RETURNS WITH INFORM
         FakeIamportPaymentProvider.webhook(payment);
