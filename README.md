@@ -9,8 +9,11 @@
 
 또한, [iamport-server-api](https://www.npmjs.com/package/iamport-server-api) 는 아임포트 서버와 연동할 수 있는 SDK 라이브러리로써, `fake-iamport-server` 의 소스코드를 토대로 [Nestia](https://github.com/samchon/nestia) 를 이용하여 빌드하였다. 그리고 이를 통하여 가짜 아임포트 서버 뿐 아니라, 진짜 아임포트 서버, 양쪽 모두와 연동할 수 있다.
 
+참고로 [Nestia](https://github.com/samchon/nestia) 는 SDK 뿐 아니라 Swagger 또한 빌드할 수 있는데, 이 또한 `fake-iamport-server` 의 소스코드 및 DTO 를 컴파일러 수준에서 분석하여 만들어지는 것인지라, 그 퀄리티가 상당하다. 실제로 아임포트가 공식 제공하는 Swagger 보다 퀄리티나 문서화 수준이 더 높다.
+
   - 서버 주소: http://localhost:10851
   - 매뉴얼
+    - **Swagger Editor**: [dist/swagger.json](https://editor.swagger.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsamchon%2Ffake-iamport-server%2Fmaster%2Fdist%2Fswagger.json)
     - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
     - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
     - 예제 코드
@@ -161,8 +164,11 @@ npm install --save fake-iamport-server-api
 
 마지막으로 실 서버를 배포하며, 연동 대상 서버를 가짜에서 진짜로 교체해주면 된다.
 
+참고로 [Nestia](https://github.com/samchon/nestia) 는 SDK 뿐 아니라 Swagger 또한 빌드할 수 있는데, 이 또한 `fake-iamport-server` 의 소스코드 및 DTO 를 컴파일러 수준에서 분석하여 만들어지는 것인지라, 그 퀄리티가 상당하다. 실제로 아임포트가 공식 제공하는 Swagger 보다 퀄리티나 문서화 수준이 더 높다.
+
   - 서버 주소: http://localhost:10851
   - 매뉴얼
+    - **Swagger Editor**: [dist/swagger.json](https://editor.swagger.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsamchon%2Ffake-iamport-server%2Fmaster%2Fdist%2Fswagger.json)
     - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
     - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
     - 예제 코드

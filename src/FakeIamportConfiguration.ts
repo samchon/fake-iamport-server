@@ -1,7 +1,6 @@
 const EXTENSION = __filename.substr(-2);
-if (EXTENSION === "js")
-    require("source-map-support").install();
-    
+if (EXTENSION === "js") require("source-map-support").install();
+
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
 import { IEncryptionPassword } from "nestia-fetcher";
@@ -12,11 +11,10 @@ import { OutOfRange } from "tstl/exception/OutOfRange";
 
 /**
  * Fake 아임포트 서버의 설정 정보.
- * 
+ *
  * @author Samchon
  */
-export namespace FakeIamportConfiguration
-{
+export namespace FakeIamportConfiguration {
     /**
      * @internal
      */
@@ -27,20 +25,20 @@ export namespace FakeIamportConfiguration
      */
     export const ENCRYPTION_PASSWORD: Readonly<IEncryptionPassword> = {
         key: "szngncCKO7wZTuayfhkRNlBfI5Nl5N88",
-        iv: "M0Yvmgrk58GBvUAt"
+        iv: "M0Yvmgrk58GBvUAt",
     };
 
     /**
      * 유저 토큰의 유효 시간.
      */
-    export const USER_EXPIRATION_TIME: number = - 3 * 60 * 1000;
+    export const USER_EXPIRATION_TIME: number = -3 * 60 * 1000;
 
     /**
      * 임시 저장소의 레코드 만료 기한.
      */
     export const STORAGE_EXPIRATION: IExpiration = {
         time: 3 * 60 * 1000,
-        capacity: 1000
+        capacity: 1000,
     };
 
     /**
@@ -55,23 +53,22 @@ export namespace FakeIamportConfiguration
 
     /**
      * 토큰 발행 전 인증 함수.
-     * 
+     *
      * 클라이언트가 전송한 api 및 secret key 값이 제대로 된 것인지 판별한다.
-     * 
+     *
      * @param accessor 인증 키 값
      */
-    export let authorize: (accessor: IAccessor) => boolean 
-        = accessor =>
-        {
-            return accessor.imp_key === "test_imp_key" 
-                && accessor.imp_secret === "test_imp_secret";
-        };
+    export let authorize: (accessor: IAccessor) => boolean = (accessor) => {
+        return (
+            accessor.imp_key === "test_imp_key" &&
+            accessor.imp_secret === "test_imp_secret"
+        );
+    };
 
     /**
      * 아임포트에서 부여해 준 API 및 secret 키.
      */
-    export interface IAccessor
-    {
+    export interface IAccessor {
         /**
          * API 키.
          */
@@ -86,8 +83,7 @@ export namespace FakeIamportConfiguration
     /**
      * 임시 저장소의 레코드 만료 기한.
      */
-    export interface IExpiration
-    {
+    export interface IExpiration {
         /**
          * 만료 시간.
          */
@@ -101,13 +97,26 @@ export namespace FakeIamportConfiguration
 }
 
 // CUSTOM EXCEPTIION CONVERSION
-helper.ExceptionManager.insert(OutOfRange, exp => new nest.NotFoundException(exp.message));
-helper.ExceptionManager.insert(InvalidArgument, exp => new nest.ConflictException(exp.message));
-helper.ExceptionManager.insert(DomainError, exp => new nest.UnprocessableEntityException(exp.message));
+helper.ExceptionManager.insert(
+    OutOfRange,
+    (exp) => new nest.NotFoundException(exp.message),
+);
+helper.ExceptionManager.insert(
+    InvalidArgument,
+    (exp) => new nest.ConflictException(exp.message),
+);
+helper.ExceptionManager.insert(
+    DomainError,
+    (exp) => new nest.UnprocessableEntityException(exp.message),
+);
 
 // TRACE EXACT SERVER INTERNAL ERROR
-helper.ExceptionManager.insert(Error, exp => new nest.InternalServerErrorException({
-    message: exp.message,
-    name: exp.name,
-    stack: exp.stack
-}));
+helper.ExceptionManager.insert(
+    Error,
+    (exp) =>
+        new nest.InternalServerErrorException({
+            message: exp.message,
+            name: exp.name,
+            stack: exp.stack,
+        }),
+);
