@@ -1,5 +1,6 @@
 .git/
 .github/
+dist/
 node_modules/
 packages/
 src/
@@ -11,7 +12,9 @@ lib/*/**/*.d.ts
 
 *.js.map
 *.*ignore
+.eslintrc.cjs
 package-lock.json
+prettier.config.js
 tsconfig.api.json
 tsconfig.json
 *.log
