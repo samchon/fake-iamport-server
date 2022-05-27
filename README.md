@@ -14,16 +14,16 @@
   - 서버 주소: http://localhost:10851
   - 매뉴얼
     - **Swagger Editor**: [dist/swagger.json](https://editor.swagger.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsamchon%2Ffake-iamport-server%2Fmaster%2Fdist%2Fswagger.json)
-    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
-    - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
+    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/api/structures/IIamportPayment.ts)
+    - API 함수: [src/api/functional/payments/index.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/api/functional/payments/index.ts)
     - 예제 코드
-      - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
-      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_vbank_payment.ts)
-      - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+      - 본인 인증: [test_fake_certification.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_certification.ts)
+      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_vbank_payment.ts)
+      - 카드 결제: [test_fake_card_payment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_card_payment.ts)
       - 간편 결제 등록
-        - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-        - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+        - [test_fake_subscription_payment_again.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_subscription_payment_again.ts)
+        - [test_fake_subscription_payment_onetime.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_receipt.ts)
   - 연관 저장소
     - [samchon/netia](https://github.com/samchon/nestia) - Automatic SDK generator for the NestJS
     - [samchon/fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server): 가짜 토스 페이먼츠 서버
@@ -169,16 +169,16 @@ npm install --save fake-iamport-server-api
   - 서버 주소: http://localhost:10851
   - 매뉴얼
     - **Swagger Editor**: [dist/swagger.json](https://editor.swagger.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fsamchon%2Ffake-iamport-server%2Fmaster%2Fdist%2Fswagger.json)
-    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/structures/IIamportPayment.ts)
-    - API 함수: [src/api/functional/payments/index.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/api/functional/payments/index.ts)
+    - 자료 구조: [src/api/structures/IIamportPayment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/api/structures/IIamportPayment.ts)
+    - API 함수: [src/api/functional/payments/index.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/api/functional/payments/index.ts)
     - 예제 코드
-      - 본인 인증: [test_fake_certification.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_certification.ts)
-      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_vbank_payment.ts)
-      - 카드 결제: [test_fake_card_payment.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_card_payment.ts)
+      - 본인 인증: [test_fake_certification.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_certification.ts)
+      - 가상 계좌 결제: [test_fake_vbank_payment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_vbank_payment.ts)
+      - 카드 결제: [test_fake_card_payment.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_card_payment.ts)
       - 간편 결제 등록
-        - [test_fake_subscription_payment_again.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_again.ts)
-        - [test_fake_subscription_payment_onetime.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
-      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.surf/samchon/fake-iamport-server/blob/HEAD/src/test/features/examples/test_fake_receipt.ts)
+        - [test_fake_subscription_payment_again.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_subscription_payment_again.ts)
+        - [test_fake_subscription_payment_onetime.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_subscription_payment_onetime.ts)
+      - 현금 영수증 발행하기: [test_fake_receipt.ts](https://github.com/samchon/fake-iamport-server/blob/master/src/test/features/examples/test_fake_receipt.ts)
   - 연관 저장소
     - [samchon/netia](https://github.com/samchon/nestia) - Automatic SDK generator for the NestJS
     - [samchon/fake-toss-payments-server](https://github.com/samchon/fake-toss-payments-server): 가짜 토스 페이먼츠 서버
