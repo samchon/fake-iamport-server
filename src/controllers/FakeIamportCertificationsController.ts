@@ -1,7 +1,7 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-is";
+import { assert } from "typescript-json";
 import { IIamportCertification } from "../api/structures/IIamportCertification";
 import { IIamportResponse } from "../api/structures/IIamportResponse";
 import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
@@ -57,7 +57,7 @@ export class FakeIamportCertificationsController {
         @nest.Request() request: express.Request,
         @nest.Body() input: IIamportCertification.IStore,
     ): IIamportResponse<IIamportCertification.IAccessor> {
-        assertType<typeof input>(input);
+        assert<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const birth: Date = new Date(
@@ -118,7 +118,7 @@ export class FakeIamportCertificationsController {
         @helper.TypedParam("imp_uid", "string") imp_uid: string,
         @nest.Body() input: IIamportCertification.IConfirm,
     ): IIamportResponse<IIamportCertification> {
-        assertType<typeof input>(input);
+        assert<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const certification = FakeIamportStorage.certifications.get(imp_uid);

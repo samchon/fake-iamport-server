@@ -15,12 +15,12 @@ import type { IIamportResponse } from "./../../../structures/IIamportResponse";
  * 
  * `certifications.otp.request` 는 아임포트 서버에 본인인증을 요청하는 API 함수이다.
  * 이 API 를 호출하면 본인인증 대상자의 핸드폰으로 OTP 문자가 전송되며, 본인인증
- * 대상자가 {@link  certifications.otp.confirm } 을 통하여 이 OTP 번호를 정확히 
+ * 대상자가 {@link  certifications.otp.confirm } 을 통하여 이 OTP 번호를 정확히
  * 입력함으로써, 본인인증이 완결된다.
  * 
- * 또한 본인인증 대상자가 자신의 핸드폰으로 전송된 OTP 문자를 입력하기 전에도, 
+ * 또한 본인인증 대상자가 자신의 핸드폰으로 전송된 OTP 문자를 입력하기 전에도,
  * 여전히해당 본인인증 내역은 {@link  certifications.at } 함수를 통하여 조회할 수 있다.
- * 다만, 이 때 리턴되는 {@link IIamportCertification} 에서 인증의 완결 여부를 
+ * 다만, 이 때 리턴되는 {@link IIamportCertification} 에서 인증의 완결 여부를
  * 지칭하는 {@link IIamportCertification.certified} 값은 `false` 이다.
  * 
  * @param connection connection Information of the remote HTTP(s) server with headers (+encryption password)
@@ -69,11 +69,11 @@ export namespace request
  * 
  * `certifications.otp.confirm` 는 {@link  certifications.otp.request } 를 통하여
  * 발급된 본인인증 건에 대하여, 본인인증 대상자의 휴대폰으로 전송된 OTP 번호를
- * 검증하고, 입력한 OTP 번호가 맞거든 해당 본인인증 건을 승인하여 완료 처리해주는 
+ * 검증하고, 입력한 OTP 번호가 맞거든 해당 본인인증 건을 승인하여 완료 처리해주는
  * API 함수이다.
  * 
  * 이처럼 본인인증을 완료하거든, 해당 본인인증 건 {@link IIamportCertification} 의
- * {@link IIamportCertification.certified} 값이 비로소 `true` 로 변경되어, 
+ * {@link IIamportCertification.certified} 값이 비로소 `true` 로 변경되어,
  * 비로소 완결된다.
  * 
  * @param connection connection Information of the remote HTTP(s) server with headers (+encryption password)

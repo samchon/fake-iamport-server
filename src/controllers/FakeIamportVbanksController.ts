@@ -1,7 +1,7 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-is";
+import { assert } from "typescript-json";
 import { randint } from "tstl/algorithm/random";
 import { v4 } from "uuid";
 
@@ -31,7 +31,7 @@ export class FakeIamportVbanksController {
         @nest.Body() input: IIamportVBankPayment.IStore,
     ): IIamportResponse<IIamportVBankPayment> {
         // VALIDATE
-        assertType<typeof input>(input);
+        assert<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         // CONSTRUCTION
@@ -108,7 +108,7 @@ export class FakeIamportVbanksController {
         @nest.Body() input: IIamportVBankPayment.IUpdate,
     ): IIamportResponse<IIamportVBankPayment> {
         // VALIDATE
-        assertType<typeof input>(input);
+        assert<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         // GET PAYMENT RECORD

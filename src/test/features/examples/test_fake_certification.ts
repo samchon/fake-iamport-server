@@ -1,3 +1,4 @@
+import TSON from "typescript-json";
 import imp from "../../../api";
 import { IIamportCertification } from "../../../api/structures/IIamportCertification";
 import { IIamportResponse } from "../../../api/structures/IIamportResponse";
@@ -18,6 +19,7 @@ export async function test_fake_certification(
             gender_digit: "1",
             carrier: "LGT",
         });
+    TSON.assert(accessor);
 
     /**
      * 본인인증 상세 레코드 조회.
@@ -34,6 +36,7 @@ export async function test_fake_certification(
             await connector.get(),
             accessor.response.imp_uid,
         );
+    TSON.assert(uncertified);
     if (uncertified.response.certified === true)
         throw new Error(
             "Bug on certifications.otp.request(): must not be certified yet.",
@@ -55,6 +58,7 @@ export async function test_fake_certification(
                 otp: uncertified.response.__otp!,
             },
         );
+    TSON.assert(confirmed);
     if (confirmed.response.certified === false)
         throw new Error(
             "Bug on certifications.otp.confirm(): must be certified.",
