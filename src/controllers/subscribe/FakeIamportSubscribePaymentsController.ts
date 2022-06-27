@@ -1,7 +1,7 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assert } from "typescript-json";
+import { assertType } from "typescript-json";
 import { v4 } from "uuid";
 
 import { IIamportCardPayment } from "../../api/structures/IIamportCardPayment";
@@ -46,7 +46,7 @@ export class FakeIampotSubscribePaymentsController {
         @nest.Request() request: express.Request,
         @nest.Body() input: IIamportSubscription.IOnetime,
     ): IIamportResponse<IIamportCardPayment> {
-        assert<typeof input>(input);
+        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         if (input.customer_uid)
@@ -134,7 +134,7 @@ export class FakeIampotSubscribePaymentsController {
         @nest.Request() request: express.Request,
         @nest.Body() input: IIamportSubscription.IAgain,
     ): IIamportResponse<IIamportCardPayment> {
-        assert<typeof input>(input);
+        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const subscription: IIamportSubscription =

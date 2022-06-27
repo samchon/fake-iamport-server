@@ -19,7 +19,7 @@ export async function test_fake_certification(
             gender_digit: "1",
             carrier: "LGT",
         });
-    TSON.assert(accessor);
+    TSON.assertType(accessor);
 
     /**
      * 본인인증 상세 레코드 조회.
@@ -36,7 +36,7 @@ export async function test_fake_certification(
             await connector.get(),
             accessor.response.imp_uid,
         );
-    TSON.assert(uncertified);
+    TSON.assertType(uncertified);
     if (uncertified.response.certified === true)
         throw new Error(
             "Bug on certifications.otp.request(): must not be certified yet.",
@@ -58,7 +58,7 @@ export async function test_fake_certification(
                 otp: uncertified.response.__otp!,
             },
         );
-    TSON.assert(confirmed);
+    TSON.assertType(confirmed);
     if (confirmed.response.certified === false)
         throw new Error(
             "Bug on certifications.otp.confirm(): must be certified.",

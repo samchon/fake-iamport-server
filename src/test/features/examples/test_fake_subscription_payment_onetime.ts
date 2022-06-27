@@ -43,7 +43,7 @@ export async function test_fake_subscription_payment_onetime(
             amount: 25_000,
             name: "Fake 주문",
         });
-    TSON.assert(onetime);
+    TSON.assertType(onetime);
     await validate(connector, onetime.response.imp_uid);
 
     /**
@@ -59,7 +59,7 @@ export async function test_fake_subscription_payment_onetime(
             amount: 10_000,
             name: "Fake 주문",
         });
-    TSON.assert(again);
+    TSON.assertType(again);
     await validate(connector, again.response.imp_uid);
 }
 
@@ -97,7 +97,7 @@ async function validate(
             await connector.get(),
             webhook.imp_uid,
         );
-    TSON.assert(reloaded);
+    TSON.assertType(reloaded);
 
     // 결제 방식 및 완료 여부 확인
     const payment: IIamportPayment = reloaded.response;

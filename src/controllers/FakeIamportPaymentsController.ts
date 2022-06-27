@@ -10,7 +10,7 @@ import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
 import { FakeIamportResponseProvider } from "../providers/FakeIamportResponseProvider";
 import { IIamportPaymentCancel } from "../api/structures/IIamportPaymentCancel";
 import { FakeIamportPaymentProvider } from "../providers/FakeIamportPaymentProvider";
-import { assert } from "typescript-json";
+import { assertType } from "typescript-json";
 
 @nest.Controller("payments")
 export class FakeIamportPaymentsController {
@@ -51,7 +51,7 @@ export class FakeIamportPaymentsController {
         @nest.Request() request: express.Request,
         @nest.Body() input: IIamportPaymentCancel.IStore,
     ): IIamportResponse<IIamportPayment> {
-        assert<typeof input>(input);
+        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const payment: IIamportPayment = FakeIamportStorage.payments.get(

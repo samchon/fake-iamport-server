@@ -1,7 +1,7 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assert } from "typescript-json";
+import { assertType } from "typescript-json";
 import { v4 } from "uuid";
 
 import { IIamportResponse } from "../../api/structures/IIamportResponse";
@@ -64,7 +64,7 @@ export class FakeIamportSubscribeCustomersController {
         @nest.Body() input: IIamportSubscription.IStore,
     ): IIamportResponse<IIamportSubscription> {
         // VALIDATE
-        assert<typeof input>(input);
+        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         // ENROLLMENT
