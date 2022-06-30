@@ -1,3 +1,4 @@
+import TSON from "typescript-json";
 import { v4 } from "uuid";
 
 import imp from "../../../api";
@@ -32,6 +33,7 @@ export async function test_fake_card_payment(
             amount: 25_000,
             name: "Fake 주문",
         });
+    TSON.assertType(output);
 
     /**
      * 아임포트 서버로부터의 웹훅 데이터.
@@ -63,6 +65,7 @@ export async function test_fake_card_payment(
             await connector.get(),
             webhook.imp_uid,
         );
+    TSON.assertType(reloaded);
 
     // 결제 방식 및 완료 여부 확인
     const payment: IIamportPayment = reloaded.response;

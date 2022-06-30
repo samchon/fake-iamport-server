@@ -10,7 +10,7 @@ import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
 import { FakeIamportResponseProvider } from "../providers/FakeIamportResponseProvider";
 import { IIamportPaymentCancel } from "../api/structures/IIamportPaymentCancel";
 import { FakeIamportPaymentProvider } from "../providers/FakeIamportPaymentProvider";
-import { assertType } from "typescript-is";
+import { assertType } from "typescript-json";
 
 @nest.Controller("payments")
 export class FakeIamportPaymentsController {

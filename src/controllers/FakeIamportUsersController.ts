@@ -1,6 +1,6 @@
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-is";
+import { assertType } from "typescript-json";
 
 import { IIamportUser } from "../api/structures/IIamportUser";
 

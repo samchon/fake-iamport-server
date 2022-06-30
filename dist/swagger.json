@@ -37,7 +37,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCertification-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
                 }
               }
             }
@@ -65,7 +65,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCertification-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
                 }
               }
             }
@@ -95,7 +95,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCertification.IAccessor-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification.IAccessor_gt_"
                 }
               }
             }
@@ -136,7 +136,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCertification-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCertification_gt_"
                 }
               }
             }
@@ -212,7 +212,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
                 }
               }
             }
@@ -242,7 +242,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportPayment_gt_"
                 }
               }
             }
@@ -272,7 +272,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportReceipt-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
                 }
               }
             }
@@ -311,7 +311,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportReceipt-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
                 }
               }
             }
@@ -339,7 +339,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportReceipt-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportReceipt_gt_"
                 }
               }
             }
@@ -369,7 +369,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportUser-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportUser_gt_"
                 }
               }
             }
@@ -399,7 +399,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportVBankPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
                 }
               }
             }
@@ -427,7 +427,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportVBankPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportVBankPayment_gt_"
                 }
               }
             }
@@ -457,7 +457,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportSubscription-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
                 }
               }
             }
@@ -496,7 +496,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportSubscription-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
                 }
               }
             }
@@ -524,7 +524,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportSubscription-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportSubscription_gt_"
                 }
               }
             }
@@ -554,7 +554,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCardPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
                 }
               }
             }
@@ -584,7 +584,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/IIamportResponse-lt-IIamportCardPayment-gt-"
+                  "$ref": "#/components/schemas/IIamportResponse_lt_IIamportCardPayment_gt_"
                 }
               }
             }
@@ -603,7 +603,7 @@
       }
     },
     "schemas": {
-      "IIamportResponse-lt-IIamportCertification-gt-": {
+      "IIamportResponse_lt_IIamportCertification_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -664,6 +664,10 @@
           },
           "foreigner": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "외국인 여부."
           },
@@ -674,11 +678,20 @@
           },
           "carrier": {
             "type": "string",
+            "enum": [
+              "SKT",
+              "KT",
+              "LGT"
+            ],
             "nullable": false,
             "description": "본인인증 대상자 통신사 코드."
           },
           "certified": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "OTP 인증 여부."
           },
@@ -764,11 +777,20 @@
           },
           "carrier": {
             "type": "string",
+            "enum": [
+              "SKT",
+              "KT",
+              "LGT"
+            ],
             "nullable": false,
             "description": "본인인증 대상자 통신사 코드."
           },
           "is_mvno": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "알뜰폰 여부."
           },
@@ -798,7 +820,7 @@
         ],
         "description": "본인 인증 입력 정보."
       },
-      "IIamportResponse-lt-IIamportCertification.IAccessor-gt-": {
+      "IIamportResponse_lt_IIamportCertification.IAccessor_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -869,6 +891,12 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "paid",
+              "ready",
+              "failed",
+              "cancelled"
+            ],
             "nullable": false,
             "description": "현재 상태."
           }
@@ -881,7 +909,7 @@
         ],
         "description": "웹훅 데이터."
       },
-      "IIamportResponse-lt-IIamportPayment-gt-": {
+      "IIamportResponse_lt_IIamportPayment_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -909,7 +937,7 @@
                 "description": "응답 데이터, 사실상 본문."
               },
               {
-                "$ref": "#/components/schemas/IIamportPayment.IBase-lt-phone-or-kpay-or-kakaopay-or-payco-or-lpay-or-ssgpay-or-tosspay-or-cultureland-or-smartculture-or-happymoney-or-booknlife-or-point-gt-",
+                "$ref": "#/components/schemas/IIamportPayment.IBase_lt_phone_or_kpay_or_kakaopay_or_payco_or_lpay_or_ssgpay_or_tosspay_or_cultureland_or_smartculture_or_happymoney_or_booknlife_or_point_gt_",
                 "description": "응답 데이터, 사실상 본문."
               }
             ]
@@ -953,6 +981,10 @@
           },
           "pay_method": {
             "type": "string",
+            "enum": [
+              "card",
+              "samsung"
+            ],
             "nullable": false
           },
           "imp_uid": {
@@ -982,6 +1014,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false,
             "description": "통화 단위."
           },
@@ -992,6 +1030,10 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1017,6 +1059,10 @@
           },
           "escrow": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1057,6 +1103,12 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "paid",
+              "ready",
+              "failed",
+              "cancelled"
+            ],
             "nullable": false,
             "description": "결제의 현재 (진행) 상태."
           },
@@ -1196,6 +1248,9 @@
           },
           "pay_method": {
             "type": "string",
+            "enum": [
+              "trans"
+            ],
             "nullable": false
           },
           "imp_uid": {
@@ -1225,6 +1280,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false,
             "description": "통화 단위."
           },
@@ -1235,6 +1296,10 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1260,6 +1325,10 @@
           },
           "escrow": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1300,6 +1369,12 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "paid",
+              "ready",
+              "failed",
+              "cancelled"
+            ],
             "nullable": false,
             "description": "결제의 현재 (진행) 상태."
           },
@@ -1417,6 +1492,9 @@
           },
           "pay_method": {
             "type": "string",
+            "enum": [
+              "vbank"
+            ],
             "nullable": false
           },
           "imp_uid": {
@@ -1446,6 +1524,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false,
             "description": "통화 단위."
           },
@@ -1456,6 +1540,10 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1481,6 +1569,10 @@
           },
           "escrow": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1521,6 +1613,12 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "paid",
+              "ready",
+              "failed",
+              "cancelled"
+            ],
             "nullable": false,
             "description": "결제의 현재 (진행) 상태."
           },
@@ -1607,11 +1705,25 @@
         ],
         "description": "가상 계좌 결제 정보."
       },
-      "IIamportPayment.IBase-lt-phone-or-kpay-or-kakaopay-or-payco-or-lpay-or-ssgpay-or-tosspay-or-cultureland-or-smartculture-or-happymoney-or-booknlife-or-point-gt-": {
+      "IIamportPayment.IBase_lt_phone_or_kpay_or_kakaopay_or_payco_or_lpay_or_ssgpay_or_tosspay_or_cultureland_or_smartculture_or_happymoney_or_booknlife_or_point_gt_": {
         "type": "object",
         "properties": {
           "pay_method": {
             "type": "string",
+            "enum": [
+              "phone",
+              "kpay",
+              "kakaopay",
+              "payco",
+              "lpay",
+              "ssgpay",
+              "tosspay",
+              "cultureland",
+              "smartculture",
+              "happymoney",
+              "booknlife",
+              "point"
+            ],
             "nullable": false
           },
           "imp_uid": {
@@ -1641,6 +1753,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false,
             "description": "통화 단위."
           },
@@ -1651,6 +1769,10 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1676,6 +1798,10 @@
           },
           "escrow": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1716,6 +1842,12 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "paid",
+              "ready",
+              "failed",
+              "cancelled"
+            ],
             "nullable": false,
             "description": "결제의 현재 (진행) 상태."
           },
@@ -1850,7 +1982,7 @@
         ],
         "description": "결제 취소 입력 정보."
       },
-      "IIamportResponse-lt-IIamportReceipt-gt-": {
+      "IIamportResponse_lt_IIamportReceipt_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -1896,6 +2028,10 @@
           },
           "type": {
             "type": "string",
+            "enum": [
+              "person",
+              "company"
+            ],
             "nullable": false,
             "description": "발행 타입 (대상)."
           },
@@ -1954,11 +2090,21 @@
           },
           "identifier_type": {
             "type": "string",
+            "enum": [
+              "phone",
+              "person",
+              "business",
+              "taxcard"
+            ],
             "nullable": false,
             "description": "현금영수증 발행대상 유형.\n\n - person: 주민등록번호\n - business: 사업자등록번호\n - phone: 휴대폰번호\n - taxcard: 국세청현금영수증카드\n\n일부 PG 사의 경우 이 항목이 없어 된다는데, 어지간하면 그냥 쓰기 바람."
           },
           "type": {
             "type": "string",
+            "enum": [
+              "person",
+              "company"
+            ],
             "nullable": false,
             "description": "현금영수증 발행 타입 (대상).\n\n누락시 person 이 사용됨."
           },
@@ -2011,7 +2157,7 @@
         ],
         "description": "아임포트에서 부여해 준 API 및 secret 키."
       },
-      "IIamportResponse-lt-IIamportUser-gt-": {
+      "IIamportResponse_lt_IIamportUser_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -2141,7 +2287,7 @@
         ],
         "description": "가상 계좌 결제 입력 정보.\n\n가상 계좌를 임의 생성할 수 있다.\n\n단, 일부 PG 사 혹은 `fake-iamport-server` 만 가능.\n\n  - 세틀뱅크\n  - 나이스페이먼츠\n  - KG이니시스"
       },
-      "IIamportResponse-lt-IIamportVBankPayment-gt-": {
+      "IIamportResponse_lt_IIamportVBankPayment_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -2192,7 +2338,7 @@
         ],
         "description": "가상 계좌 결제의 수정 입력 정보.\n\n아직 입금되지 않은 가상계좌의 입금기한 또는 입금금액을 수정할 수 있다.\n\n다만, 세틀뱅크 혹은 `fake-iamport-server` 만 가능."
       },
-      "IIamportResponse-lt-IIamportSubscription-gt-": {
+      "IIamportResponse_lt_IIamportSubscription_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -2431,6 +2577,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false
           },
           "tax_free": {
@@ -2465,11 +2617,19 @@
           },
           "interest_free_by_merchant": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "카드할부처리할 때, 할부이자가 발생하는 경우 (카드사 무이자 프로모션 제외). \n\n부과되는 할부이자를 고객대신 가맹점이 지불하고자 PG사와 계약된 경우(현재, 나이스페이먼츠만 지원됨)"
           },
           "use_card_point": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "승인요청시 카드사 포인트 차감하며 결제승인처리할지 flag. \n\nPG사 영업담당자와 계약 당시 사전 협의 필요(현재, 나이스페이먼츠만 지원됨)"
           },
@@ -2495,7 +2655,7 @@
         ],
         "description": "결제 신청 입력 정보."
       },
-      "IIamportResponse-lt-IIamportCardPayment-gt-": {
+      "IIamportResponse_lt_IIamportCardPayment_gt_": {
         "type": "object",
         "properties": {
           "code": {
@@ -2541,6 +2701,12 @@
           },
           "currency": {
             "type": "string",
+            "enum": [
+              "KRW",
+              "USD",
+              "EUR",
+              "JPY"
+            ],
             "nullable": false
           },
           "tax_free": {
@@ -2575,11 +2741,19 @@
           },
           "interest_free_by_merchant": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "카드할부처리할 때, 할부이자가 발생하는 경우 (카드사 무이자 프로모션 제외). \n\n부과되는 할부이자를 고객대신 가맹점이 지불하고자 PG사와 계약된 경우(현재, 나이스페이먼츠만 지원됨)"
           },
           "use_card_point": {
             "type": "boolean",
+            "enum": [
+              false,
+              true
+            ],
             "nullable": false,
             "description": "승인요청시 카드사 포인트 차감하며 결제승인처리할지 flag. \n\nPG사 영업담당자와 계약 당시 사전 협의 필요(현재, 나이스페이먼츠만 지원됨)"
           },

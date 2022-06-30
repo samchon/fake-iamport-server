@@ -12,13 +12,13 @@ import type { IIamportPayment } from "./../../structures/IIamportPayment";
 /**
  * 웹훅 이벤트 더미 리스너.
  * 
- * `internal.webhook` 은 실제 아임포트의 서버에는 존재하지 않는 API 로써, 
- * `fake-impoart-server` 의 {@link  Configuration.WEBHOOK_URL } 에 아무런 URL 을 설정하지 
- * 않으면, `fake-iamport-server` 로부터 발생하는 모든 종류의 웹훅 이벤트는 이 곳으로 전달되어 
+ * `internal.webhook` 은 실제 아임포트의 서버에는 존재하지 않는 API 로써,
+ * `fake-impoart-server` 의 {@link  Configuration.WEBHOOK_URL } 에 아무런 URL 을 설정하지
+ * 않으면, `fake-iamport-server` 로부터 발생하는 모든 종류의 웹훅 이벤트는 이 곳으로 전달되어
  * 무의미하게 사라진다.
  * 
- * 따라서 `fake-iamport-server` 를 사용하여 아임포트 서버와의 연동을 미리 검증코자 할 때는, 
- * 반드시 {@link  Configuration.WEBHOOK_URL } 를 설정하여 웹훅 이벤트가 귀하의 백엔드 서버로 
+ * 따라서 `fake-iamport-server` 를 사용하여 아임포트 서버와의 연동을 미리 검증코자 할 때는,
+ * 반드시 {@link  Configuration.WEBHOOK_URL } 를 설정하여 웹훅 이벤트가 귀하의 백엔드 서버로
  * 제대로 전달되도록 하자.
  * 
  * @param connection connection Information of the remote HTTP(s) server with headers (+encryption password)
@@ -64,7 +64,7 @@ export namespace webhook
 /**
  * 가상 계좌에 입금하기.
  * 
- * `internal.deposit` 은 실제 아임포트 결제 서버에는 존재하지 않는 API 로써, 가상 계좌 
+ * `internal.deposit` 은 실제 아임포트 결제 서버에는 존재하지 않는 API 로써, 가상 계좌
  * 결제를 신청한 고객이, 이후 가상 계좌에 목표 금액을 입금하는 상황을 시뮬레이션 할 수 있는
  * 함수이다.
  * 

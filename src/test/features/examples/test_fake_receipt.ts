@@ -1,3 +1,4 @@
+import TSON from "typescript-json";
 import imp from "../../../api";
 import { IIamportPayment } from "../../../api/structures/IIamportPayment";
 import { IIamportReceipt } from "../../../api/structures/IIamportReceipt";
@@ -21,6 +22,7 @@ export async function test_fake_receipt(
                 buyer_tel: "010********",
             },
         );
+    TSON.assertType(output);
     if (output.response.amount !== payment.amount)
         throw new Error("Bug on receipts.store(): different amount.");
 
@@ -29,6 +31,7 @@ export async function test_fake_receipt(
             await connector.get(),
             payment.imp_uid,
         );
+    TSON.assertType(reloaded);
     if (reloaded.response.cash_receipt_issue === false)
         throw new Error("Bug on receipts.store(): payment doesn't know.");
 }

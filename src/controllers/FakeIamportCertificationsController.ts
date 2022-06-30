@@ -1,7 +1,7 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-is";
+import { assertType } from "typescript-json";
 import { IIamportCertification } from "../api/structures/IIamportCertification";
 import { IIamportResponse } from "../api/structures/IIamportResponse";
 import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
