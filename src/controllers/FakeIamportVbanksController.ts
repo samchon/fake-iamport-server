@@ -1,7 +1,6 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-json";
 import { randint } from "tstl/algorithm/random";
 import { v4 } from "uuid";
 
@@ -9,10 +8,10 @@ import { IIamportPayment } from "../api/structures/IIamportPayment";
 import { IIamportResponse } from "../api/structures/IIamportResponse";
 import { IIamportVBankPayment } from "../api/structures/IIamportVBankPayment";
 
-import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
 import { FakeIamportPaymentProvider } from "../providers/FakeIamportPaymentProvider";
 import { FakeIamportResponseProvider } from "../providers/FakeIamportResponseProvider";
 import { FakeIamportStorage } from "../providers/FakeIamportStorage";
+import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
 import { RandomGenerator } from "../utils/RandomGenerator";
 
 @nest.Controller("vbanks")
@@ -28,10 +27,9 @@ export class FakeIamportVbanksController {
     @helper.TypedRoute.Post()
     public store(
         @nest.Request() request: express.Request,
-        @nest.Body() input: IIamportVBankPayment.IStore,
+        @helper.TypedBody() input: IIamportVBankPayment.IStore,
     ): IIamportResponse<IIamportVBankPayment> {
-        // VALIDATE
-        assertType<typeof input>(input);
+        // AUTHORIZE
         FakeIamportUserAuth.authorize(request);
 
         // CONSTRUCTION
@@ -105,10 +103,9 @@ export class FakeIamportVbanksController {
     @helper.TypedRoute.Put()
     public update(
         @nest.Request() request: express.Request,
-        @nest.Body() input: IIamportVBankPayment.IUpdate,
+        @helper.TypedBody() input: IIamportVBankPayment.IUpdate,
     ): IIamportResponse<IIamportVBankPayment> {
-        // VALIDATE
-        assertType<typeof input>(input);
+        // AUTHORIZE
         FakeIamportUserAuth.authorize(request);
 
         // GET PAYMENT RECORD

@@ -1,7 +1,6 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-json";
 import { v4 } from "uuid";
 
 import { IIamportResponse } from "../../api/structures/IIamportResponse";
@@ -29,7 +28,7 @@ export class FakeIamportSubscribeCustomersController {
         @nest.Request() request: express.Request,
         @helper.TypedParam("customer_uid", "string") customer_uid: string,
     ): IIamportResponse<IIamportSubscription> {
-        // VALIDATE USER TOKEN
+        // AUTHORIZE
         FakeIamportUserAuth.authorize(request);
 
         // GET SUBSCRIPTION RECORD
@@ -61,10 +60,9 @@ export class FakeIamportSubscribeCustomersController {
     public store(
         @nest.Request() request: express.Request,
         @helper.TypedParam("customer_uid", "string") customer_uid: string,
-        @nest.Body() input: IIamportSubscription.IStore,
+        @helper.TypedBody() input: IIamportSubscription.IStore,
     ): IIamportResponse<IIamportSubscription> {
-        // VALIDATE
-        assertType<typeof input>(input);
+        // AUTHORIZE
         FakeIamportUserAuth.authorize(request);
 
         // ENROLLMENT
@@ -105,7 +103,7 @@ export class FakeIamportSubscribeCustomersController {
         @nest.Request() request: express.Request,
         @helper.TypedParam("customer_uid", "string") customer_uid: string,
     ): IIamportResponse<IIamportSubscription> {
-        // VALIDATE
+        // AUTHORIZE
         FakeIamportUserAuth.authorize(request);
 
         // ERASE RECORD

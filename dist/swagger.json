@@ -664,10 +664,6 @@
           },
           "foreigner": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "외국인 여부."
           },
@@ -688,10 +684,6 @@
           },
           "certified": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "OTP 인증 여부."
           },
@@ -787,10 +779,6 @@
           },
           "is_mvno": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "알뜰폰 여부."
           },
@@ -1030,10 +1018,6 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1059,10 +1043,6 @@
           },
           "escrow": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1296,10 +1276,6 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1325,10 +1301,6 @@
           },
           "escrow": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1540,10 +1512,6 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1569,10 +1537,6 @@
           },
           "escrow": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false
           },
           "buyer_name": {
@@ -1769,10 +1733,6 @@
           },
           "cash_receipt_issue": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "현금 영수증 발행 여부."
           },
@@ -1798,10 +1758,6 @@
           },
           "escrow": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false
           },
           "buyer_name": {
@@ -2617,19 +2573,11 @@
           },
           "interest_free_by_merchant": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "카드할부처리할 때, 할부이자가 발생하는 경우 (카드사 무이자 프로모션 제외). \n\n부과되는 할부이자를 고객대신 가맹점이 지불하고자 PG사와 계약된 경우(현재, 나이스페이먼츠만 지원됨)"
           },
           "use_card_point": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "승인요청시 카드사 포인트 차감하며 결제승인처리할지 flag. \n\nPG사 영업담당자와 계약 당시 사전 협의 필요(현재, 나이스페이먼츠만 지원됨)"
           },
@@ -2741,19 +2689,11 @@
           },
           "interest_free_by_merchant": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "카드할부처리할 때, 할부이자가 발생하는 경우 (카드사 무이자 프로모션 제외). \n\n부과되는 할부이자를 고객대신 가맹점이 지불하고자 PG사와 계약된 경우(현재, 나이스페이먼츠만 지원됨)"
           },
           "use_card_point": {
             "type": "boolean",
-            "enum": [
-              false,
-              true
-            ],
             "nullable": false,
             "description": "승인요청시 카드사 포인트 차감하며 결제승인처리할지 flag. \n\nPG사 영업담당자와 계약 당시 사전 협의 필요(현재, 나이스페이먼츠만 지원됨)"
           },
