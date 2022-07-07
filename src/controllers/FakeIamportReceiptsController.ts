@@ -45,7 +45,7 @@ export class FakeIamportReceiptsController {
     public store(
         @nest.Request() request: express.Request,
         @helper.TypedParam("imp_uid", "string") imp_uid: string,
-        @nest.Body() input: IIamportReceipt.IStore,
+        @helper.TypedBody() input: IIamportReceipt.IStore,
     ): IIamportResponse<IIamportReceipt> {
         FakeIamportUserAuth.authorize(request);
 

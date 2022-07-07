@@ -1,13 +1,14 @@
 import express from "express";
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-json";
+import { v4 } from "uuid";
+
 import { IIamportCertification } from "../api/structures/IIamportCertification";
 import { IIamportResponse } from "../api/structures/IIamportResponse";
-import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
-import { FakeIamportStorage } from "../providers/FakeIamportStorage";
+
 import { FakeIamportResponseProvider } from "../providers/FakeIamportResponseProvider";
-import { v4 } from "uuid";
+import { FakeIamportStorage } from "../providers/FakeIamportStorage";
+import { FakeIamportUserAuth } from "../providers/FakeIamportUserAuth";
 import { RandomGenerator } from "../utils/RandomGenerator";
 
 @nest.Controller("certifications")
@@ -55,9 +56,8 @@ export class FakeIamportCertificationsController {
     @helper.TypedRoute.Post("otp/request")
     public request(
         @nest.Request() request: express.Request,
-        @nest.Body() input: IIamportCertification.IStore,
+        @helper.TypedBody() input: IIamportCertification.IStore,
     ): IIamportResponse<IIamportCertification.IAccessor> {
-        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const birth: Date = new Date(
@@ -116,9 +116,8 @@ export class FakeIamportCertificationsController {
     public confirm(
         @nest.Request() request: express.Request,
         @helper.TypedParam("imp_uid", "string") imp_uid: string,
-        @nest.Body() input: IIamportCertification.IConfirm,
+        @helper.TypedBody() input: IIamportCertification.IConfirm,
     ): IIamportResponse<IIamportCertification> {
-        assertType<typeof input>(input);
         FakeIamportUserAuth.authorize(request);
 
         const certification = FakeIamportStorage.certifications.get(imp_uid);

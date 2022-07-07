@@ -1,6 +1,5 @@
 import helper from "nestia-helper";
 import * as nest from "@nestjs/common";
-import { assertType } from "typescript-json";
 
 import { IIamportUser } from "../api/structures/IIamportUser";
 
@@ -27,10 +26,8 @@ export class FakeIamportUsersController {
      */
     @helper.TypedRoute.Post("getToken")
     public getToken(
-        @nest.Body() input: IIamportUser.IAccessor,
+        @helper.TypedBody() input: IIamportUser.IAccessor,
     ): IIamportResponse<IIamportUser> {
-        assertType<typeof input>(input);
-
         const user: IIamportUser = FakeIamportUserAuth.issue(input);
         return FakeIamportResponseProvider.success(user);
     }
